@@ -8,3 +8,29 @@
     {% endblock %}
 </div>
 {% endblock %}
+{% block left %}
+<div class="logo">
+    <h1>WTAssess</h1>
+</div>
+
+<ul class="nav">
+{% block nav %}
+    <li name="dashboard">
+        <span>Dashboard</span>
+    </li>
+    <li name="tests">
+        <span>Tests</span>
+    </li>
+    <li name="analytics">
+        <span>Analytics</span>
+    </li>
+{% endblock %}
+</ul>
+
+<div class="bot">
+{% block bot %}
+    <span class="affil">You are using WTAssess in affiliation with TJHSST.</span>
+    <span class="copy">WebAssess v0.1</span>
+{% endblock %}
+</div>
+{% endblock %}
