@@ -5,6 +5,6 @@ $(document).ready(function() {
 });
 nav = {
     go: function(l) {
-        location.href = '#'+l;
+        location.href = '/'+l;
     }
 }
