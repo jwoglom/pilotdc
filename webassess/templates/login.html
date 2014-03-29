@@ -21,7 +21,6 @@
 
     <form action="/login/" method="post">
     {% csrf_token %}
-            <input type="hidden" name="csrfmiddlewaretoken" value="">
             
                 <label>{{ form.username.label_tag }}</label>
                 {{ form.username }}
