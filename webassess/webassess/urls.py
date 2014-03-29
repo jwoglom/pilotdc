@@ -11,7 +11,13 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', 'dashboard.views.dashboard_view', name='dashboard_view'),
-    url(r'^login/$', 'users.views.process_login', name='process_login'),
+    url(r'^login/$', 'django.contrib.auth.views.login', {
+        'template_name': 'login.html',
+        #'name': 'process_login'
+    }),
+    #url(r'^login/$', 'users.views.process_login', name='process_login'),
     url(r'^logout/$', 'users.views.process_logout', name='process_logout'),
-    url(r'^admin/$', 'users.views.admin_index', name='admin_index'),
+    #url(r'^admin/$', 'users.views.admin_index', name='admin_index'),
+
+    url(r'^admin/', include(admin.site.urls)),
 )

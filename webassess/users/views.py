@@ -6,6 +6,7 @@ from django.template import RequestContext, loader
 from django.core.servers.basehttp import FileWrapper
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.context_processors import csrf
 
 def process_login(request):
 	username = password = ''
@@ -41,8 +42,8 @@ def http403(request):
 def admin_index(request):
 	user = request.user
 	
-	if not user.groups.filter(name="admins").exists():
-		raise
+	#if not user.groups.filter(name="admins").exists():
+	#	raise Exception
 
 	school = user.staff.school
 
