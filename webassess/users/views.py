@@ -37,23 +37,23 @@ def http403(request):
 	template = loader.get_template('resources/http403.html')
 	return HttpResponseForbidden(template.render(RequestContext(request)))
 
-@login_required
-def admin_index(request):
-	user = request.user
-	
-	if not user.groups.filter(name="admins").exists():
-		raise
-
-	school = user.staff.school
-
-	context = {
-		'user': user,
-		'school': school,
-		'view': 'admin_index',
-		'is-admin': True,
-	}
-
-	if staticfiles_storage.exists("css/{}.css".format(school.number)):
-		context['school_theme'] = "css/{}.css".format(school.number)
-
-	return render(request, 'resources/admin_index.html', context)
+#@login_required
+#def admin_index(request):
+#	user = request.user
+#	
+#	if not user.groups.filter(name="admins").exists():
+#		raise
+#
+#	school = user.staff.school
+#
+#	context = {
+#		'user': user,
+#		'school': school,
+#		'view': 'admin_index',
+#		'is-admin': True,
+#	}
+#
+#	if staticfiles_storage.exists("css/{}.css".format(school.number)):
+#		context['school_theme'] = "css/{}.css".format(school.number)
+#
+#       return render(request, 'resources/admin_index.html', context)
