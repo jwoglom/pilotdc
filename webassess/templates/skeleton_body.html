@@ -1,0 +1,10 @@
+{% extends "skeleton.html" %}
+{% block content %}
+<div class="page {% block mod %}{% endblock %}">
+    <div class="title">
+        <span>{% block modtitle %}{% endblock %}</span>
+    </div>
+    {% block page %}
+    {% endblock %}
+</div>
+{% endblock %}

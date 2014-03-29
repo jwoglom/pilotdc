@@ -1,0 +1,29 @@
+{% load staticfiles %}
+{% extends "skeleton_body.html" %}
+{% block mod %}dashboard{% endblock %}
+{% block modtitle %}Dashboard{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}" />
+{% endblock %}
+{% block page %}
+<div class="pane pane1">
+    <div class="title">
+        <span>Open Tests</span>
+    </div>
+    <table>
+    <tr>
+    <th class="name">Name</th>
+    <th>Class</th>
+    <th>Teacher</th>
+    <th>Closes in</th>
+    </tr>
+    </table>
+</div>
+<div class="pane pane2">
+    <div class="title">
+        <span>Closed Tests</span>
+    </div>
+
+</div>
+{% endblock %}

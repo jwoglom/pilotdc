@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+    <title>
+    {% block title %}
+    WTAssess
+    {% endblock %}
+    </title>
+
+    {% block head %}
+    {% endblock %}
+    {% block css %}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext,cyrillic-ext,greek-ext,cyrillic,vietnamese,greek" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/core.css' %}" />
+    {% block pagecss %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+    {% endblock %}
+    {% endblock %}
+
+    {% block js %}
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+    {% block pagejs %}
+    <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+    {% endblock %}
+    {% endblock %}
+    
+
+</head>
+<body{% block bodytag %}{% endblock %}>
+{% block body %}
+<div class="container">
+    <div class="left">
+        {% block left %}
+        
+        {% endblock %}
+    </div>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</div>
+{% endblock body %}
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends "skeleton.html" %}
+{% block pagecss %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+{% endblock %}
+</head>
+<body>
+
+{% block left %}
+<div class="center">
+    <div class="logo">
+        <h1>WTAssess</h1>
+    </div>
+
+    <div class="login">
+    <h2>Enter your login credentials.</h2>
+
+    <form action="/login" method="post">
+            <input type="hidden" name="csrfmiddlewaretoken" value="">
+            
+                <input id="id_username" name="username" placeholder="Username" type="text" mouseev="true" autocomplete="off" keyev="true" clickev="true"><br>
+            
+                <input id="id_password" name="password" placeholder="Password" type="password" mouseev="true" autocomplete="off" keyev="true" clickev="true"><br>
+            
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+{% endblock %}
