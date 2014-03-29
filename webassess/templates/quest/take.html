@@ -1,7 +1,176 @@
 {% extends "skeleton_body.html" %}
 {% load staticfiles %}
-{% block mod %}quest/take{% endblock %}
+{% block mod %}quest-take{% endblock %}
 {% block modtitle %}TESTTAKING{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <style type="text/css">
+.page.quest-take .tt {
+    margin-top: 50px;
+    height: auto;
+}
+
+.qnav {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.qnav .gop {
+    float: left;
+}
+
+.qnav .goc {
+    position: absolute;
+    left: 50%;
+    width: 150px;
+    margin-left: -75px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.qnav .gon {
+    float: right;
+}
+
+.qnav .qnum {
+    background: transparent;
+    width: 15px;
+
+}
+
+.qcontents {
+    margin-top: 50px;
+}
+
+.qcontents .qhtml {
+    margin-left: 45px;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.qoptions {
+    margin-top: 20px;
+    margin-left: 65px;    
+}
+
+.qc-opt {
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+.cq-choices .qchoice {
+    display: block;
+    float: left;
+    margin-right: 10px;
+    height: 25px;
+}
+
+    </style>
+{% endblock %}
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript">
+quest = {
+    TESTID: 1,
+    numqs: 2,
+    questions: [
+        {
+            "id": 1,
+            "type": "mc",
+            "html": "What is the answer to this question?",
+            "choices": [
+                {"id": 1, "html": "correct"},
+                {"id": 2, "html": "2"},
+                {"id": 3, "html": "3"},
+                {"id": 4, "html": "4"}
+            ]
+        },
+        {
+            "id": 2,
+            "type": "mc",
+            "html": "Second is the answer to this question?",
+            "choices": [
+                {"id": 1, "html": "1"},
+                {"id": 2, "html": "correct"},
+                {"id": 3, "html": "3"},
+                {"id": 4, "html": "4"}
+            ]
+        }
+    ],
+    map: {
+    // qid: aid
+    },
+    curqid: 0,
+    curqnum: 0,
+    goback: function() {
+        if(this.curqnum < 1) return;
+        this.curqnum--;
+        this.display(this.questions[this.curqnum-1].id);
+    },
+    gonext: function() { console.log('n '+this.curqnum);
+        if(this.curqnum >= this.numqs) return;
+        this.curqnum++;
+        this.display(this.questions[this.curqnum-1].id);
+    },
+    display: function(qid) {
+        this.curqid = qid;
+        var q = this.questions.filter(function(t){return t.id == qid;})[0];
+        $(".cq-html").html(q.html);
+        $(".cq-curqnum").html(this.curqnum);
+        $("input.qnum").attr("value", this.curqnum);
+        console.log(q);
+        $(".cq-choices").html("");
+        var opt = 0;
+        for(var i=0 in j=q.choices) {
+            console.log(j[i]);
+            $(".cq-choices").append(
+                "<div class='qc-opt opt"+(++opt)+"'>" +
+                "<input name='qchoice' class='qchoice' type='radio' value="+opt+" />" +
+                "<span class='qc-opttext'>"+j[i].html+"</span>" +
+                "</div>"
+            );
+            this.mapevents();
+            if(typeof this.map[qid] != 'undefined') $('input.qchoice[value='+this.map[qid]+']').attr('selected',true);
+        }
+
+    },
+    init: function() {
+        this.gonext();
+    },
+    save: function(n) {
+        this.map[this.curqid] = n;
+        console.log('map:',this.map);
+    },
+    mapevents: function() {
+        $("input.qchoice").change(function() { quest.save($(this).val()); })
+    }
+
+};
+$(function() {
+    quest.init();
+});
+$(function() {
+    
+});
+    </script>
+{% endblock %}
 {% block page %}
-hi
+<div class="tt">
+    <div class="qnav">
+        <button class="gop" onclick="quest.goback()">Previous</button>
+        <span class="goc">
+            <input class="qnum" name="qnum" value="1" size="1" onchange="q.go(this.value)" /> of <span class='qnum-total'></span>
+        </span>
+        <button class="gon" onclick="quest.gonext()">Next</button>
+    </div><br />
+    <div class="qcontents">
+    <form name="qform">
+        <div class="qhtml">
+            <span class="cq-html"></span>
+        </div>
+        <div class="qoptions">
+            <span class="cq-choices"></span>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

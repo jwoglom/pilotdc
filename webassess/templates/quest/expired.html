@@ -1,0 +1,17 @@
+{% extends "skeleton_body.html" %}
+{% load staticfiles %}
+{% block mod %}quest-take{% endblock %}
+{% block modtitle %}TESTTAKING{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <style type="text/css">
+.error {
+    font-size: 32px;
+}
+
+    </style>
+{% endblock %}
+{% block page %}
+<div class='error'>This test does not exist or has expired.</div>
+
+{% endblock %}
