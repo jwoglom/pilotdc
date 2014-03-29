@@ -20,18 +20,18 @@ def process_login(request):
 			if next_page is not None:
 				return redirect(next_page)
 			else:
-				return redirect('selector_index')
+				return redirect('/')
 	
 	next_page = request.GET.get('next', None)
 		
 	context = {
 		'next': next_page,
 	}
-	return render(request, 'resources/login.html', context)
+	return render(request, 'login.html', context)
 
 def process_logout(request):
 	logout(request)
-	return redirect("selector_index")
+	return redirect("/")
 
 def http403(request):
 	template = loader.get_template('resources/http403.html')
