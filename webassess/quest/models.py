@@ -1,6 +1,6 @@
 from django.db import models
 
-from users import Teacher
+from users.models import Teacher
 
 class Tag(models.Model):
     name = models.CharField(max_length=20)
