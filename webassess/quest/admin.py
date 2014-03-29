@@ -1,6 +1,4 @@
-
 from django.contrib import admin
-
 from quest.models import (
             Test,
             Tag,
