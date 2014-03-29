@@ -10,9 +10,9 @@ class Question(models.Model):
 
 class Test(models.Model):
     num = models.IntegerField(default=0)
-    postdate = models.DataTimeField('date published')
+    postdate = models.DateTimeField('date published')
     creator = models.ForeignKey(Teacher)
-    enddate = models.DataTimeField('date of closing')
+    enddate = models.DateTimeField('date of closing')
     questions = models.ManyToManyField(Question)
 
 # Create your models here.
