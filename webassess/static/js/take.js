@@ -67,9 +67,13 @@ $.extend(true, quest, {
             $(".cq-choices").append(
                 "<div class='qc-opt opt"+(++opt)+"'>" +
                 "<input name='qchoice' class='qchoice' type='radio' value="+opt+" checked style='display:none' />" +
-                "<span class='qc-opttext'><input type='text' name='fr' value='' /></span>" +
-                "</div>"
+                "<span class='qc-opttext'><input type='text' class='fr' name='fr' value='' /></span>" +
+                "</div><br />"
             );
+            if(typeof this.map[qid] != 'undefined') $('input.fr').val(this.map[qid]);
+            $("input.fr").change(chg = function() {
+                quest.save($(this).val());
+            }).on("keyup", chg);
         }
 
     },
@@ -101,13 +105,21 @@ $.extend(true, quest, {
                 "<td>You said <span title=\""+j[i]+"\">"+a.html.replace(/<(.|\n)*?>/, '')+"</span></td>" +
                 "</tr>");*/
             var q = this.getqid(i);
-            var a = q.choices[this.map[i]-1];
-            
-            $(".review table").append(
-                "<tr data-id='"+i+"'>" +
-                "<td>#"+i+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td>" +
-                "<td>You said: &nbsp; <span title=\""+a.id+"\">"+a.html.replace(/<(.|\n)*?>/, '')+"</span></td>" +
-                "</tr>");
+            if(q.type == 'mc') {
+                var a = q.choices[this.map[i]-1];
+                $(".review table").append(
+                    "<tr data-id='"+i+"'>" +
+                    "<td>#"+i+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td>" +
+                    "<td>You said: &nbsp; <span title=\""+a.id+"\">"+a.html.replace(/<(.|\n)*?>/, '')+"</span></td>" +
+                    "</tr>");
+            } else if(q.type == 'fr') {
+                var a = this.map[i];
+                $(".review table").append(
+                    "<tr data-id='"+i+"'>" +
+                    "<td>#"+i+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td>" +
+                    "<td>You said: &nbsp; <span>"+a.replace(/<(.|\n)*?>/, '')+"</span></td>" +
+                    "</tr>");
+            }
         }
         $(".review table tr").click(function() {
             quest.jump($(this).attr('data-id'));quest.unreview();
