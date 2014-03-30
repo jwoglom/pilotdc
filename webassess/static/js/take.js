@@ -7,7 +7,7 @@ $.extend(true, quest, {
     status: "",
     goback: function() {
         if(this.status == "review") return this.unreview();
-        if(this.curqnum < 1) return;
+        if(this.curqnum <= 1) return;
         this.nexttext();
         this.curqnum--;
         this.display(this.questions[this.curqnum-1].id);
@@ -80,14 +80,21 @@ $.extend(true, quest, {
         $(".qcontents .qhtml, .qcontents .qoptions").hide();
         $(".review table").html("");
         for(var i in j=this.map) {
-            var q = window.q= this.getqid(i);
-            console.log(q);
-            var a = window.a= this.getaid(q, i);
-            console.log(a);
+        /*    console.log('i'+i);
+            var q = window.q= this.getqid(i), ai = 0;
+            var a = window.a= quest.getaid(q, parseInt(this.map[i]));
             $(".review table").append(
                 "<tr data-id='"+i+"'>" +
                 "<td>#"+i+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td>" +
                 "<td>You said <span title=\""+j[i]+"\">"+a.html.replace(/<(.|\n)*?>/, '')+"</span></td>" +
+                "</tr>");*/
+            var q = this.getqid(i);
+            var a = q.choices[this.map[i]-1];
+            
+            $(".review table").append(
+                "<tr data-id='"+i+"'>" +
+                "<td>#"+i+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td>" +
+                "<td>You said <span title=\""+a.id+"\">"+a.html.replace(/<(.|\n)*?>/, '')+"</span></td>" +
                 "</tr>");
         }
         $(".review table > tr").click(function() {
@@ -98,9 +105,14 @@ $.extend(true, quest, {
         this.status = "";
         $("button.gon").html("Next");
         $("button.gop").html("Previous");
+        console.log('a'+this.curqid);
+        //qd = this.curqnum;
+        this.curqnum++;
+        this.display(this.curqid);
+
+        console.log('a'+this.curqid);
         $(".qcontents .review").hide();
         $(".qcontents .qhtml, .qcontents .qoptions").show();
-        this.jump(this.curqid);
         
     },
     init: function() {

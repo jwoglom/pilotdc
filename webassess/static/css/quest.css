@@ -48,8 +48,13 @@
 
 .qc-opt {
     font-size: 16px;
-    padding-bottom: 10px;
+    padding-bottom: 2px;
 }
+
+.qc-opttext > p {
+    margin: 5px;
+}
+
 .cq-choices .qchoice {
     display: block;
     float: left;
