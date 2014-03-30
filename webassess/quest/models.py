@@ -5,6 +5,8 @@ import datetime
 
 class Tag(models.Model):
     name = models.CharField(max_length=20)
+    def __str__(self):
+        return self.name
 
     def __unicode__(self):
         return "{0}".format(self.name)
@@ -17,6 +19,7 @@ class AnswerOption(models.Model):
 
 class Question(models.Model):
     qtype = models.IntegerField(default=0)
+<<<<<<< HEAD
     tags = models.ManyToManyField(Tag, related_name='tags')
     header = models.CharField(default="", max_length=10000)
     #choices = models.CharField(default="", max_length=10000)
@@ -27,6 +30,14 @@ class Question(models.Model):
     def __unicode__(self):
         return "{0} ({1}): {2}: {3}".format(self.header, self.qtype, self.choices, self.answer)
 
+=======
+    tags = models.ManyToManyField(Tag)
+    header = models.CharField(default="", max_length=2000)
+    choices = models.CharField(default="", max_length=2000)
+    answer = models.CharField(default="", max_length=1000)
+    def __str__(self):
+        return self.header[:10]
+>>>>>>> 2e8d1a71f0d0d3985974d382f8526669ed3c60ec
 
 class Test(models.Model):
     num = models.IntegerField(default=0)
@@ -40,5 +51,7 @@ class Test(models.Model):
             blank=True
             )
     questions = models.ManyToManyField(Question)
+    def __str__(self):
+        return "Test #" + self.num
 
 # Create your models here.
