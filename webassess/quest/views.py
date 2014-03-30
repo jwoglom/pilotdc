@@ -101,18 +101,35 @@ def add_view(request):
 @user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) > 0, login_url='/login/?req=teacher')
 def add_submit(request):
     if request.POST:
+        title = request.POST.get('testtitle')
         data = request.POST.get('data')
         enddate = int(request.POST.get('enddate'))
         jdat = json.loads(data)
+        print json.dumps(jdat, sort_keys=True, indent=4, separators=(',', ':'))
+        print title
         print enddate
         tobj = Test(
+            name = title,
             creator=Teacher.objects.get(user=request.user),
-            enddate=datetime.date.today() + datetime.timedelta(days=enddate)
+            enddate=datetime.datetime.now() + datetime.timedelta(days=enddate)
         )
         tobj.save()
-        for opt in jdat[u'options']:
-            aopt = AnswerOption(text=opt[u'html'])
-            tobj.questions.add(aopt)
+        for q in jdat:
+            ques = Question(
+                    qtype = str(q[u'type']),
+                    header = str(q[u'title']),
+                    )
+            ques.save()
+            print "so far"
+            for opt in q[u'options']:
+                aopt = AnswerOption(text=opt[u'html'])
+                print "so far far"
+                aopt.save()
+                ques.choices.add(aopt)
+            if u'correct' in q:
+                ques.answer = AnswerOption(text=q[u'correct'][u'html'])
+            ques.save()
+            tobj.questions.add(ques)
         tobj.save()
         
         
