@@ -44,8 +44,6 @@ add = function() {
         $(this).parent().append("<div class='option' contenteditable=true ondblclick='this.remove()'><span></span>Option</div>");
     })
 
-
-    $("input.enddate").datetimepicker();
 }
 
 parse = function() {
@@ -78,7 +76,7 @@ parse = function() {
 
 send = function(data) {
     var enddate = $("input.enddate").val();
-    if(enddate == "") enddate = "01/01/3000 00:00";
+    if(enddate == "") enddate = "9001";
     var testtitle = $(".testtitle").html();
     $.post('/quest/add/submit/', {'data': JSON.stringify(data), 'testtitle': testtitle, 'enddate': enddate}, function() {
         location.href = '/dashboard';
