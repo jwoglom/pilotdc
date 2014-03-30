@@ -3,7 +3,9 @@ from quest.models import (
             Test,
             Tag,
             Question,
-            AnswerOption)
+            AnswerOption,
+            AnswerSave,
+            TestSave)
 """
 class QuestionInline(admin.StackedInline):
     model = Question
@@ -22,3 +24,5 @@ admin.site.register(Test) #, TestAdmin)
 admin.site.register(Question)
 admin.site.register(Tag)
 admin.site.register(AnswerOption)
+admin.site.register(AnswerSave)
+admin.site.register(TestSave)

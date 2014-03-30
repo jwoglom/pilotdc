@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from quest.models import TestSave, AnswerOption, Question, Test
+from quest.models import TestSave, AnswerOption, Question, Test, AnswerSave
 #, AnswersSave, AnswerSave
 import json
 from quest.models import Test
@@ -34,16 +34,32 @@ def submit_view(request):
         testid = request.POST.get('testid')
         mapstr = request.POST.get('map')
         questionstr = request.POST.get('questions')
+        sender = request.user._wrapped if hasattr(request.user,'_wrapped') else request.user
+        print sender,type(sender)
+        print sender.student
+        sender = sender.student
         qmap = json.loads(mapstr)
-        print qmap
-        questions = json2obj(questionstr) #Afaik I know this is pointless
-
+        print qmap,"was loaded"
+        #questions = json2obj(questionstr) #Afaik I know this is pointless
         testobj = Test.objects.get(id=testid)
-        save = TestSave(
-            test=testobj
-        )
-        save.save()
-        #save.saves.add(
-        #    test=testobj,
-        #    saves=
-        #)
+        try:
+            print "Trying..."
+            print sender.testsave_set
+            print type(testobj)
+            saveobj = sender.testsave_set.get(test=testobj)
+            print "TestSave already exists"
+        except:
+            print "Must create new test"
+            saveobj = TestSave(
+                    user = sender,
+                    test=testobj
+            )
+            saveobj.save()
+        print "Prepped the saveobj"
+        for testq in testobj.questions.all():
+            print testq
+            new=AnswerSave(question = testq, correct = False)
+            new.save()
+            saveobj.saves.add(new)
+            print "Added"
+        return redirect("/")
