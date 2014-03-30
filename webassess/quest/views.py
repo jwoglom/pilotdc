@@ -1,9 +1,10 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from quest.models import TestSave, AnswerOption, Question, Test, AnswerSave
 #, AnswersSave, AnswerSave
 import json
 from quest.models import Test
+from users.models import Teacher
 from django.utils import timezone
 
 @login_required
@@ -42,6 +43,7 @@ def submit_view(request):
         print qmap,"was loaded"
         #questions = json2obj(questionstr) #Afaik I know this is pointless
         testobj = Test.objects.get(id=testid)
+
         try:
             print "Trying..."
             print sender.testsave_set

@@ -51,16 +51,25 @@ $.extend(true, quest, {
         console.log(q);
         $(".cq-choices").html("");
         var opt = 0;
-        for(var i=0 in j=q.choices) {
-            console.log(j[i]);
+        if(q.type == 'mc') {
+            for(var i=0 in j=q.choices) {
+                console.log(j[i]);
+                $(".cq-choices").append(
+                    "<div class='qc-opt opt"+(++opt)+"'>" +
+                    "<input name='qchoice' class='qchoice' type='radio' value="+opt+" />" +
+                    "<span class='qc-opttext'>"+j[i].html+"</span>" +
+                    "</div>"
+                );
+                this.mapevents();
+                if(typeof this.map[qid] != 'undefined') $('input.qchoice[value='+this.map[qid]+']').attr('checked',true);
+            }
+        } else if(q.type == 'fr') {
             $(".cq-choices").append(
                 "<div class='qc-opt opt"+(++opt)+"'>" +
-                "<input name='qchoice' class='qchoice' type='radio' value="+opt+" />" +
-                "<span class='qc-opttext'>"+j[i].html+"</span>" +
+                "<input name='qchoice' class='qchoice' type='radio' value="+opt+" checked style='display:none' />" +
+                "<span class='qc-opttext'><input type='text' name='fr' value='' /></span>" +
                 "</div>"
             );
-            this.mapevents();
-            if(typeof this.map[qid] != 'undefined') $('input.qchoice[value='+this.map[qid]+']').attr('checked',true);
         }
 
     },

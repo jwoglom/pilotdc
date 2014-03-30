@@ -17,10 +17,10 @@ class AnswerOption(models.Model):
 
 class Question(models.Model):
     qtype = models.CharField(default="mc", max_length=10)
-    tags = models.ManyToManyField(Tag, related_name='tags')
+    tags = models.ManyToManyField(Tag, related_name='tags', null=True)
     #header = models.CharField(default="", max_length=10000)
     header = HTMLField()
-    choices = models.ManyToManyField(AnswerOption, related_name='answer_choices')
+    choices = models.ManyToManyField(AnswerOption, related_name='answer_choices', null=True)
     answer = models.ForeignKey(AnswerOption, null=True, related_name='answer_correct')
     def __unicode__(self):
         return unicode("{0} ({1})".format(self.id, self.qtype))
