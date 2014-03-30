@@ -81,8 +81,9 @@ def submit_view(request):
             ansSave = -1
             for ans in saveobj.saves.all():
                 if ans.question.id==int(k): ansSave=ans
-            ansSave.choice = AnswerOption.objects.get(id=int(qmap[k]))
+            ansSave.choice = Question.objects.get(id=int(k)).choices.all()[int(qmap[k])-1]
             ansSave.save()
+        embed()
         grade(saveobj)
         return redirect("/")
 
