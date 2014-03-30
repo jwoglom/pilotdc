@@ -26,6 +26,7 @@ class Question(models.Model):
         return unicode("{0} ({1})".format(self.id, self.qtype))
 
 class Test(models.Model):
+    name = models.CharField(default="Test", max_length=20)
     postdate = models.DateTimeField('date published',
                 default=datetime.datetime.now,
                 blank=True,
