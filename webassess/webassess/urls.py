@@ -21,4 +21,5 @@ urlpatterns = patterns('',
     url(r'^quest/take/1$', 'quest.views.take_view', name='quest_take'),
 
     url(r'^admin/', include(admin.site.urls)),
+    (r'^tinymce/', include('tinymce.urls')),
 )

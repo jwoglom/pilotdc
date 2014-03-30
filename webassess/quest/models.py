@@ -1,43 +1,30 @@
 from django.db import models
-
+from tinymce.models import HTMLField
 from users.models import Teacher
 import datetime
 
 class Tag(models.Model):
     name = models.CharField(max_length=20)
-    def __str__(self):
-        return self.name
 
     def __unicode__(self):
-        return "{0}".format(self.name)
+        return unicode(self.name)
 
 class AnswerOption(models.Model):
     text = models.CharField(default="", max_length=10000)
 
     def __unicode__(self):
-        return "{0}".format(self.text)
+        return unicode(self.text)
 
 class Question(models.Model):
-    qtype = models.IntegerField(default=0)
-<<<<<<< HEAD
+    qtype = models.CharField(default="mc", max_length=10)
     tags = models.ManyToManyField(Tag, related_name='tags')
-    header = models.CharField(default="", max_length=10000)
-    #choices = models.CharField(default="", max_length=10000)
+    #header = models.CharField(default="", max_length=10000)
+    header = HTMLField()
     choices = models.ManyToManyField(AnswerOption, related_name='answer_choices')
-    #answer = models.CharField(default="", max_length=10000)
     answer = models.ForeignKey(AnswerOption, null=True, related_name='answer_correct')
 
     def __unicode__(self):
-        return "{0} ({1}): {2}: {3}".format(self.header, self.qtype, self.choices, self.answer)
-
-=======
-    tags = models.ManyToManyField(Tag)
-    header = models.CharField(default="", max_length=2000)
-    choices = models.CharField(default="", max_length=2000)
-    answer = models.CharField(default="", max_length=1000)
-    def __str__(self):
-        return self.header[:10]
->>>>>>> 2e8d1a71f0d0d3985974d382f8526669ed3c60ec
+        return unicode("{0} ({1})".format(self.id, self.qtype))
 
 class Test(models.Model):
     num = models.IntegerField(default=0)
@@ -51,7 +38,8 @@ class Test(models.Model):
             blank=True
             )
     questions = models.ManyToManyField(Question)
-    def __str__(self):
-        return "Test #" + self.num
+    
+    def __unicode__(self):
+        return unicode(self.num)
 
 # Create your models here.

@@ -42,7 +42,8 @@ INSTALLED_APPS = (
     'south',
     'users',
     'quest',
-    'dashboard'
+    'dashboard',
+    'tinymce',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,8 +89,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = '/static/'
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
 LOGIN_URL = '/login/'
+
