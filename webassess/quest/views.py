@@ -90,9 +90,11 @@ def submit_view(request):
 
 def grade(tsave):
     for ansSave in tsave.saves.all():
-        if ansSave.choice.text == ansSave.question.answer.text:
-            ansSave.correct=True
-            ansSave.save()
+        try:
+            if ansSave.choice.text == ansSave.question.answer.text:
+                ansSave.correct=True
+                ansSave.save()
+        except: pass
     for ansSave in tsave.saves.all():
         if ansSave.correct: 
             tsave.score+=1
