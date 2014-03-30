@@ -43,24 +43,7 @@ def submit_view(request):
         print qmap,"was loaded"
         #questions = json2obj(questionstr) #Afaik I know this is pointless
         testobj = Test.objects.get(id=testid)
-<<<<<<< HEAD
-        save = TestSave(
-            test=testobj
-        )
-        save.save()
-        #save.saves.add(
-        #    test=testobj,
-        #    saves=
-        #)
 
-@user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) > 0, login_url='/login/?req=teacher')
-def add_view(request):
-    return render(request, 'quest/add.html', {})
-
-@user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) > 0, login_url='/login/?req=teacher')
-def add_submit(request):
-    pass
-=======
         try:
             print "Trying..."
             print sender.testsave_set
