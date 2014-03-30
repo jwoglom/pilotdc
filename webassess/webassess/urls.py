@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', 'dashboard.views.dashboard_view', name='dashboard_view'),
-    url(r'^test/<number>/', 'quest.views.test', name='Test interface'),
+    #url(r'^test/<number>/', 'quest.views.test', name='Test interface'),
     url(r'^dashboard/$', 'dashboard.views.dashboard_view', name='dashboard_view'),
     url(r'^login/$', 'django.contrib.auth.views.login', {
         'template_name': 'login.html',
