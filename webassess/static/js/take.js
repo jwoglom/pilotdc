@@ -58,7 +58,7 @@ $.extend(true, quest, {
                     "<div class='qc-opt opt"+(++opt)+"'>" +
                     "<input name='qchoice' class='qchoice' type='radio' value="+opt+" />" +
                     "<span class='qc-opttext'>"+j[i].html+"</span>" +
-                    "</div>"
+                    "</div><br />"
                 );
                 this.mapevents();
                 if(typeof this.map[qid] != 'undefined') $('input.qchoice[value='+this.map[qid]+']').attr('checked',true);
