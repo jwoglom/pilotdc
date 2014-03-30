@@ -80,15 +80,18 @@ def submit_view(request):
             print k,qmap[k]
             ansSave = -1
             for ans in saveobj.saves.all():
-                if ans.question.id==int(k): ansSave=ans
-            ansSave.choice = AnswerOption.objects.get(id=int(qmap[k]))
+                if ans.question.id==int(k): 
+                    ansSave=ans
+                    print "Found Question",ansSave
+            ansSave.choice = Question.objects.get(id=int(k)).choices.all()[int(qmap[k])-1]
             ansSave.save()
+        embed()
         grade(saveobj)
         return redirect("/")
 
 def grade(tsave):
     for ansSave in tsave.saves.all():
-        if ansSave.choice == ansSave.question.answer:
+        if ansSave.choice.text == ansSave.question.answer.text:
             ansSave.correct=True
             ansSave.save()
     for ansSave in tsave.saves.all():
