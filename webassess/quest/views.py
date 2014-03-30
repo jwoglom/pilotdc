@@ -104,15 +104,15 @@ def add_submit(request):
     if request.POST:
         data = request.POST.get('data')
         enddate = request.POST.get('enddate')
-        jdat = json.loads(data)
-        print enddate
+        jdat = json.loads(data)[0]
+        print jdat
         tobj = Test(
             creator=Teacher.objects.get(user=request.user),
-            enddate=pytz.timezone("America/New_York").localize(parse_datetime(enddate), is_dst=None)
+#            enddate=pytz.timezone("America/New_York").localize(parse_datetime(enddate), is_dst=None)
         )
         tobj.save()
-        for opt in jdat.options:
-            aopt = AnswerOption(html=opt.html)
+        for opt in jdat[u'options']:
+            aopt = AnswerOption(text=opt[u'html'])
             tobj.questions.add(aopt)
         tobj.save()
         
