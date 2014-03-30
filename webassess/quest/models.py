@@ -38,7 +38,7 @@ class Test(models.Model):
     questions = models.ManyToManyField(Question)
 
     def __unicode__(self):
-        return unicode(self.num)
+        return unicode(self.id)
 """
 class TestSave(models.Model):
     test = models.ForeignKey(Test)
