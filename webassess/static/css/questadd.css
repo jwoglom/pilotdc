@@ -1,5 +1,5 @@
 .questions {
-    margin-top: 75px;
+    margin-top: 100px;
 }
 
 .question {
@@ -44,6 +44,12 @@
     margin: -5px 50px;
 }
 
+.generic {
+    position: absolute;
+    top: 60px;
+    margin-left: 15px;
+}
+
 .mc-options {
     margin-top: 10px;
     margin-bottom: 5px;
@@ -67,8 +73,8 @@
     display: none;
 }
 
-.question input.enddate {
+input.enddate {
     background: transparent;
     padding: 2px 5px;
-    width: 75px;
+    width: 150px;
 }

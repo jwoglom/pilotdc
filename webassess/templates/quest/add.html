@@ -8,6 +8,7 @@
 {% endblock %}
 {% block js %}
     {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/jquery-ui-timepicker.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/questadd.js' %}"></script>
 {% endblock %}
 {% block page %}
@@ -17,7 +18,6 @@
     <input type="radio" class="type" name="type" value="fr" /> Free Response<br />
     <div class='title' contenteditable=true onclick="$(this).selectText();">Title</div><br />
     <div class='main-opts'>
-    Close at: <input type="text" class="enddate" value="" /><br />
     Tags: <span class='tags' contenteditable=true onclick="$(this).selectText();">separate with spaces</span>
     </div>
     <div class='mc'>
@@ -40,7 +40,9 @@
     <button class='newq'>Add Question</button>
     <button class='done'>Finish</button>
 </div>
-
+<div class='generic'>
+Close at: <input type="text" class="enddate" value="" /><br />
+</div>
 <div class='questions'>
 </div>
 

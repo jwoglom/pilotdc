@@ -40,7 +40,8 @@ add = function() {
         }
     });
 
-    $("input.enddate").datepicker();
+
+    $("input.enddate").datetimepicker();
 }
 
 parse = function() {
@@ -51,7 +52,6 @@ parse = function() {
             type: $("input.type", $(this)).attr('value'),
             title: $(".title", $(this)).html(),
             tags: $(".tags", $(this)).html().split(' '),
-            enddate: $(".enddate", $(this)).attr('value')
         };
         if(obj.type == 'mc') {
             opts = $(".mc-options > .option", $(this));
@@ -73,7 +73,9 @@ parse = function() {
 }
 
 send = function(data) {
-    $.post('/quest/add/submit/', {'data': JSON.stringify(data)}, function() {
+    var enddate = $("input.enddate").attr("value");
+    if(enddate == "") enddate = "01/01/3000 00:00";
+    $.post('/quest/add/submit/', {'data': JSON.stringify(data), 'enddate': enddate}, function() {
         location.href = '/dashboard';
     });
 }
