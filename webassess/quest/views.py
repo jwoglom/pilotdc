@@ -105,6 +105,7 @@ def add_submit(request):
         data = request.POST.get('data')
         enddate = int(request.POST.get('enddate'))
         jdat = json.loads(data)
+        print json.dumps(jdat, sort_keys=True, indent=4, separators=(',', ':'))
         print enddate
         tobj = Test(
             creator=Teacher.objects.get(user=request.user),
