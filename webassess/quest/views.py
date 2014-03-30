@@ -77,3 +77,5 @@ def grade(tsave):
             tsave.score+=1
             tsave.save()
     
+def add_view(request):
+    return render(request, 'quest/add.html', {})

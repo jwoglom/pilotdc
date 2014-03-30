@@ -17,10 +17,10 @@ class AnswerOption(models.Model):
 
 class Question(models.Model):
     qtype = models.CharField(default="mc", max_length=10)
-    tags = models.ManyToManyField(Tag, related_name='tags', null=True)
+    tags = models.ManyToManyField(Tag, related_name='tags', null=True, blank=True)
     #header = models.CharField(default="", max_length=10000)
     header = HTMLField()
-    choices = models.ManyToManyField(AnswerOption, related_name='answer_choices', null=True)
+    choices = models.ManyToManyField(AnswerOption, related_name='answer_choices', null=True, blank=True)
     answer = models.ForeignKey(AnswerOption, null=True, related_name='answer_correct')
     def __unicode__(self):
         return unicode("{0} ({1})".format(self.id, self.qtype))
@@ -30,7 +30,7 @@ class Test(models.Model):
                 default=datetime.datetime.now,
                 blank=True,
             )
-    creator = models.ForeignKey('users.Teacher', null=True)
+    creator = models.ForeignKey('users.Teacher', null=True, blank=True)
     enddate = models.DateTimeField('date of closing',
                 default=lambda: datetime.datetime.now() + datetime.timedelta(days=9999),
                 blank=True
@@ -46,7 +46,7 @@ class AnswerSave(models.Model):
     correct = models.BooleanField(default=False)
 
 class TestSave(models.Model):
-    user = models.ForeignKey('users.Student', null=True)
+    user = models.ForeignKey('users.Student', null=True, blank=True)
     test = models.ForeignKey(Test)
     saves = models.ManyToManyField(AnswerSave)
     score = models.IntegerField(default=0)

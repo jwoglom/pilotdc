@@ -10,7 +10,7 @@ class School(models.Model):
 class Student(models.Model):
     user = models.OneToOneField(User)
     school = models.ForeignKey(School)
-    tests = models.ManyToManyField('quest.TestSave')
+    tests = models.ManyToManyField('quest.TestSave', null=True, blank=True)
     def get_full_name(self):
         return self.user.last_name + ", " + self.user.first_name
     
