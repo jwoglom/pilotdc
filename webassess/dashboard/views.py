@@ -7,6 +7,7 @@ from quest.models import Test
 import datetime
 
 @login_required
+@user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) == 0, login_url='/dashboard/teacher/')
 def dashboard_view(request):
     test_list = Test.objects.order_by('-postdate')
     for x in test_list:
