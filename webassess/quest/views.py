@@ -7,9 +7,9 @@ import json
 from quest.models import Test
 from users.models import Teacher
 from django.utils import timezone
-from django.utils.dateparse import parse_datetime
 from IPython import embed
 import json
+import datetime
 import pytz
 
 @login_required
@@ -103,12 +103,12 @@ def add_view(request):
 def add_submit(request):
     if request.POST:
         data = request.POST.get('data')
-        enddate = request.POST.get('enddate')
-        jdat = json.loads(data)[0]
-        print jdat
+        enddate = int(request.POST.get('enddate'))
+        jdat = json.loads(data)
+        print enddate
         tobj = Test(
             creator=Teacher.objects.get(user=request.user),
-#            enddate=pytz.timezone("America/New_York").localize(parse_datetime(enddate), is_dst=None)
+            enddate=datetime.date.today() + datetime.timedelta(days=enddate)
         )
         tobj.save()
         for opt in jdat[u'options']:

@@ -97,3 +97,5 @@ STATICFILES_DIRS = (
 
 LOGIN_URL = '/login/'
 
+USE_TZ = True
+

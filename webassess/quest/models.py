@@ -33,7 +33,7 @@ class Test(models.Model):
             )
     creator = models.ForeignKey('users.Teacher', null=True, blank=True)
     enddate = models.DateTimeField('date of closing',
-                default=lambda: datetime.datetime.now() + datetime.timedelta(days=9999),
+                default=lambda: datetime.datetime.now() + datetime.timedelta(days=9001),
                 blank=True
             )
     questions = models.ManyToManyField(Question)
