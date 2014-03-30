@@ -4,8 +4,21 @@ from quest.models import (
             Tag,
             Question,
             AnswerOption)
+"""
+class QuestionInline(admin.StackedInline):
+    model = Question
+    extra = 3
 
-admin.site.register(Test)
+
+class TestAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None,               {'fields': ['creator']}),
+        ('Date information', {'fields': ['postdate', 'enddate'],
+                              'classes': ['collapse']}),
+    ]
+    inlines = [QuestionInline]
+"""
+admin.site.register(Test) #, TestAdmin)
 admin.site.register(Question)
 admin.site.register(Tag)
 admin.site.register(AnswerOption)

@@ -26,15 +26,14 @@ class Question(models.Model):
         return unicode("{0} ({1})".format(self.id, self.qtype))
 
 class Test(models.Model):
-#    num = models.IntegerField(default=0)
     postdate = models.DateTimeField('date published',
-            default=datetime.datetime.now,
-            blank=True,
+                default=datetime.datetime.now,
+                blank=True,
             )
     creator = models.ForeignKey(Teacher, null=True)
     enddate = models.DateTimeField('date of closing',
-            default=lambda: datetime.datetime.now() + datetime.timedelta(days=9999),
-            blank=True
+                default=lambda: datetime.datetime.now() + datetime.timedelta(days=9999),
+                blank=True
             )
     questions = models.ManyToManyField(Question)
 
