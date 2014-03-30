@@ -58,7 +58,7 @@ $(function() {
     <div class="qnav">
         <button class="gop" onclick="quest.goback()">Previous</button>
         <span class="goc">
-            <input class="qnum" name="qnum" value="1" size="1" onchange="q.jump(this.value)" /> of <span class='qnum-total'></span>
+            <input class="qnum" name="qnum" value="1" size="1" onchange="quest.jump(this.value)" onblur="quest.jump(this.value)" /> of <span class='qnum-total'></span>
         </span>
         <button class="gon" onclick="quest.gonext()">Next</button>
     </div><br />

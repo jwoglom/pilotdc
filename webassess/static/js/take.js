@@ -39,6 +39,7 @@ $.extend(true, quest, {
     nexttext: function() {
         if(this.curqnum == this.numqs - 1) $("button.gon").html("Review Test");
         else $("button.gon").html("Next");
+
     },
     display: function(qid) {
         this.curqid = qid;
@@ -46,6 +47,7 @@ $.extend(true, quest, {
         $(".cq-html").html(q.html);
         $(".cq-curqnum").html(this.curqnum);
         $("input.qnum").attr("value", this.curqnum);
+        location.hash = '#num='+this.curqnum;
         console.log(q);
         $(".cq-choices").html("");
         var opt = 0;
@@ -74,6 +76,7 @@ $.extend(true, quest, {
     review: function() {
         this.status = "review";
         this.curqnum--;
+        $("input.qnum").attr('disabled',true);
         $("button.gon").html("Submit Test");
         $("button.gop").html("Back to Test");
         $(".qcontents .review").show();
@@ -103,6 +106,7 @@ $.extend(true, quest, {
     },
     unreview: function() {
         this.status = "";
+        $("input.qnum").attr('disabled',false);
         $("button.gon").html("Next");
         $("button.gop").html("Previous");
         console.log('a'+this.curqid);
@@ -116,6 +120,8 @@ $.extend(true, quest, {
         
     },
     init: function() {
+        h = ''+location.hash;
+        console.log(h);
         if(this.questions.length < 1) {
             $(".qcontents").html("<div style='font-size: 20px'>An error occurred loading this test.</div><p>There were no questions found in this test.</p>");
             throw 'questions.length='+this.questions.length;
@@ -123,7 +129,14 @@ $.extend(true, quest, {
         }
         this.loadls();
         $(".qnum-total").html(this.numqs);
+        
         this.gonext();
+        console.log(h);
+        if(h.indexOf('num=') != -1) {
+            n = parseInt(h.split('num=')[1]);
+            quest.curqnum = n;
+            this.display(this.questions[n-1].id);
+        }
     },
     loadls: function() {
         try {
