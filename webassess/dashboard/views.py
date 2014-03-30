@@ -14,13 +14,15 @@ def dashboard_view(request):
         print x.postdate,timezone.now()
     
     ids = [x.test for x in request.user.student.testsave_set.all()]
+    print ids
     tests=[]
     for x in test_list: 
         if x.enddate < timezone.now():
             time = "-1"
         else: time = "1"
         if x in ids: 
-            score = request.user.student.testsave_set.get(id=x.id).score
+            print x
+            score = request.user.student.testsave_set.get(test=x).score
             tests.append((x,time,score))
         else:
             tests.append((x,time,"-1"))
