@@ -9,9 +9,7 @@
 {% block js %}
     {{ block.super }}
     <script type="text/javascript">
-htmlfix = function(h) {
-    return $("<div/>").html(h).text();
-}
+htmlfix = function(h) { return $("<div/>").html(h).text(); }
 quest = {
     TESTID: {{ testid }},
     numqs: {{ questions.count }},   
@@ -42,7 +40,6 @@ quest = {
                 ]
             }{% if not forloop.last %},{% endif %}
         {% endfor %}
-
     ]
 };
 </script>

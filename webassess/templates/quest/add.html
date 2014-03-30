@@ -4,149 +4,11 @@
 {% block modtitle %}ADD TEST{% endblock %}
 {% block css %}
     {{ block.super }}
-    <style type="text/css">
-.questions {
-    margin-top: 75px;
-}
-
-.question {
-    width: 80%;
-    height: auto;
-    padding: 5px 20px;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-}
-
-.question .title {
-    font-size: 22px;
-}
-
-.question .tags-cont {
-    font-size: 14px;
-}
-
-.question *[contenteditable=true] {
-    border: 1px solid #999999;
-    border-radius: 5px;
-    padding: 2px;
-    min-width: 20px;
-}
-
-.buttons {
-    position: absolute;
-    right: 50px;
-    top: 5px;
-}
-
-.buttons button {
-    font-size: 15px;
-    
-}
-
-.option-add {
-    position: relative;
-    padding: 5px 10px;
-    margin: -5px 50px;
-}
-
-.mc-options {
-    margin-top: 10px;
-}
-
-.mc-options .option.correct {
-    background-color: yellow;
-}
-
-.mc-options .option > span {
-    width: 16px;
-    height: 16px;
-    background-image: url({% static 'img/x.png' %});
-    display: block;
-    float: right;
-    z-index: 99;
-    cursor: pointer;
-}
-
-.question .fr {
-    display: none;
-}
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/questadd.css' %}" />
 {% endblock %}
 {% block js %}
     {{ block.super }}
-    <script type="text/javascript">
-$(function() {
-
-$(".newq").click(function() {
-    $(".questions").append($("<div class='question'></div>").html($("script#question").html()));
-    $(".mc-options .option > span").click(function() {
-        console.log("x");
-        $(this).parent().remove();
-    })
-
-    $("input.type").on("change", function() {
-        nm = $(this).attr("value");
-        if(nm == 'mc') {
-            $('.mc', $(this).parent()).show();
-            $('.fr', $(this).parent()).hide();
-        } else if(nm == 'fr') {
-            $('.fr', $(this).parent()).show();
-            $('.mc', $(this).parent()).hide();
-        }
-    })
-});
-
-$(".done").click(function() {
-    parse();
-})
-
-$(".mc-options .option > span").click(function() {
-    $(this).parent().remove();
-})
-
-$(".mc-options .option").dblclick(function() {
-    $(".option", $(this).parent()).removeClass("correct");
-    $(this).addClass("correct");
-})
-
-$(".option-add").click(function() {
-    $(this).parent().append("<div class='option' contenteditable=true ondblclick='this.remove()'><span></span>Option</div>");
-})
-
-
-data = [];
-parse = function() {
-    var qs = $(".questions > .question");
-    qs.each(function() {
-        obj = {
-            type: $("input.type", $(this)).attr('value'),
-            title: $(".title", $(this)).html(),
-            tags: $(".tags", $(this)).html().split(' ')
-        };
-        opts = $(".mc-options > .option", $(this));
-        obj['options'] = [];
-        opts.each(function() {
-            obj['options'].push(o = {
-                html: $(this).html()
-            });
-            if($(this).hasClass('correct')) obj['correct'] = o;
-        });
-        data.push(obj);
-    });
-    console.log(data);
-    
-}
-
-
-$(".newq").click();
-
-});
-
-
-    </script>
+    <script type="text/javascript" src="{% static 'js/questadd.js' %}"></script>
 {% endblock %}
 {% block page %}
 <script type="text/template" id="question">
@@ -154,16 +16,17 @@ $(".newq").click();
     &nbsp; &nbsp; &nbsp;
     <input type="radio" class="type" name="type" value="fr" /> Free Response<br />
     <div class='title' contenteditable=true onclick="$(this).selectText();">Title</div><br />
-    <div class='tags-cont'>
+    <div class='main-opts'>
+    Close at: <input type="text" class="enddate" value="" /><br />
     Tags: <span class='tags' contenteditable=true onclick="$(this).selectText();">separate with spaces</span>
     </div>
     <div class='mc'>
         <br /><span style="font-size: 20px">Options:</span> <button class='option-add'>Add</button> Double-click an option to set it as correct. Click x to delete.
         <div class='mc-options'>
-            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span')==-1)this.innerHTML+='<span></span>'"><span></span>Option</div>
-            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span')==-1)this.innerHTML+='<span></span>'"><span></span>Option</div>
-            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span')==-1)this.innerHTML+='<span></span>'"><span></span>Option</div>
-            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span')==-1)this.innerHTML+='<span></span>'"><span></span>Option</div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span>')==-1)this.innerHTML+='<span></span>'">Option<span></span></div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span>')==-1)this.innerHTML+='<span></span>'">Option<span></span></div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span>')==-1)this.innerHTML+='<span></span>'">Option<span></span></div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span>')==-1)this.innerHTML+='<span></span>'">Option<span></span></div>
         </div>
     </div>
     <div class='fr'>

@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from quest.models import TestSave, AnswerOption, Question, Test, AnswerSave
 #, AnswersSave, AnswerSave
@@ -7,6 +8,7 @@ from quest.models import Test
 from users.models import Teacher
 from django.utils import timezone
 from IPython import embed
+import json
 @login_required
 def take_view(request, test_id):
     try:
@@ -83,3 +85,10 @@ def grade(tsave):
     
 def add_view(request):
     return render(request, 'quest/add.html', {})
+
+def add_submit(request):
+    if request.POST:
+        data = request.POST.get('data')
+        dobj = json.loads(data)
+        print dobj,"loaded"
+    return HttpResponse("")
