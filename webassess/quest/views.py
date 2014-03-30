@@ -118,3 +118,20 @@ def add_submit(request):
         
         
     return HttpResponse("")
+
+@login_required
+def edit_view(request, test_id):
+    try:
+        test_id = int(test_id)
+    except:
+        return render(request, 'quest/expired.html')
+    test = -1
+    try: 
+        test = Test.objects.get(id=test_id)
+    except: 
+        return render(request, 'quest/expired.html')
+    if test==-1 or test.enddate < timezone.now():
+        return render(request, 'quest/expired.html')
+    return render(request, 'quest/edit.html', {
+        'questions': test.questions.all()
+    })
