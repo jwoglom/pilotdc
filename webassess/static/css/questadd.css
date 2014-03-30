@@ -1,5 +1,5 @@
 .questions {
-    margin-top: 100px;
+    margin-top: 140px;
 }
 
 .question {
@@ -77,4 +77,8 @@ input.enddate {
     background: transparent;
     padding: 2px 5px;
     width: 150px;
+}
+
+.testtitle {
+    font-size: 22px;
 }
