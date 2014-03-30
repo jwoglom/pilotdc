@@ -1,0 +1,86 @@
+{% extends "skeleton_teacher.html" %}
+{% load staticfiles %}
+{% block mod %}quest-add{% endblock %}
+{% block modtitle %}EDIT TEST{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/questadd.css' %}" />
+{% endblock %}
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript">
+var questions = [
+    /*{
+        "id": 1,
+        "type": "mc",
+        "html": "What is the answer to this question?",
+        "choices": [
+            {"id": 1, "html": "correct"},
+            {"id": 2, "html": "2"},
+            {"id": 3, "html": "3"},
+            {"id": 4, "html": "4"}
+        ]
+    }*/
+    {% for question in questions %}
+        {
+            "id": {{ question.id }},
+            "type": "{{ question.qtype }}",
+            "html": htmlfix("{{ question.header }}"),
+            "choices": [
+            {% for choice in question.choices.all %}
+                {
+                    "id": {{ choice.id }},
+                    "html": htmlfix("{{ choice.text }}")
+                }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+            ]
+        }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+];
+    </script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui-timepicker.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/questedit.js' %}"></script>
+    <script type="text/javascript">
+$(function() {
+    loadin(questions);
+});
+    </script>
+{% endblock %}
+{% block page %}
+<script type="text/template" id="question">
+    <input type="radio" class="type" name="type" value="mc" checked /> Multiple Choice
+    &nbsp; &nbsp; &nbsp;
+    <input type="radio" class="type" name="type" value="fr" /> Free Response<br />
+    <div class='title' contenteditable=true onclick="$(this).selectText();">Title</div><br />
+    <div class='main-opts'>
+    Tags: <span class='tags' contenteditable=true onclick="$(this).selectText();">separate with spaces</span>
+    </div>
+    <div class='mc'>
+        <br /><span style="font-size: 20px">Options:</span> <button class='option-add'>Add</button> Double-click an option to set it as correct. Click x to delete.
+        <div class='mc-options'>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='Option') $(this).selectText();">Option</div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='Option') $(this).selectText();">Option</div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='Option') $(this).selectText();">Option</div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='Option') $(this).selectText();">Option</div>
+        </div>
+    </div>
+    <div class='fr'>
+        <br /><span style="font-size: 20px">Free Response Answer:</span>
+        <div class='option' contenteditable=true onclick="if(this.value=='Input the answer..') $(this).selectText();">Input the answer..</div>
+    </div>
+    <div class='closex' onclick='$(this).parent().remove()'></div>
+    <br />
+    </div>
+</script>
+<div class='buttons'>
+    <button class='newq'>Add Question</button>
+    <button class='done'>Finish</button>
+</div>
+<div class='generic'>
+<div class='testtitle' contenteditable=true onclick="$(this).selectText();">Test Title</div><br />
+Closes in: <input type="text" class="enddate" value="7" /> days<br />
+</div>
+<div class='questions'>
+</div>
+
+{% endblock %}
