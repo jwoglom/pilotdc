@@ -1,4 +1,4 @@
-{% extends "skeleton_body.html" %}
+{% extends "skeleton_teacher.html" %}
 {% load staticfiles %}
 {% block mod %}quest-add{% endblock %}
 {% block modtitle %}ADD TEST{% endblock %}
@@ -23,16 +23,17 @@
     <div class='mc'>
         <br /><span style="font-size: 20px">Options:</span> <button class='option-add'>Add</button> Double-click an option to set it as correct. Click x to delete.
         <div class='mc-options'>
-            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span>')==-1)this.innerHTML+='<span></span>'">Option<span></span></div>
-            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span>')==-1)this.innerHTML+='<span></span>'">Option<span></span></div>
-            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span>')==-1)this.innerHTML+='<span></span>'">Option<span></span></div>
-            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span>')==-1)this.innerHTML+='<span></span>'">Option<span></span></div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='Option') $(this).selectText();">Option</div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='Option') $(this).selectText();">Option</div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='Option') $(this).selectText();">Option</div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='Option') $(this).selectText();">Option</div>
         </div>
     </div>
     <div class='fr'>
         <br /><span style="font-size: 20px">Free Response Answer:</span>
         <div class='option' contenteditable=true onclick="if(this.value=='Input the answer..') $(this).selectText();">Input the answer..</div>
     </div>
+    <div class='closex' onclick='$(this).parent().remove()'></div>
     <br />
     </div>
 </script>
@@ -41,6 +42,7 @@
     <button class='done'>Finish</button>
 </div>
 <div class='generic'>
+<div class='testtitle' contenteditable=true onclick="$(this).selectText();">Test Title</div><br />
 Close at: <input type="text" class="enddate" value="" /><br />
 </div>
 <div class='questions'>

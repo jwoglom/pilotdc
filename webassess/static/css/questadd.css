@@ -1,5 +1,5 @@
 .questions {
-    margin-top: 100px;
+    margin-top: 140px;
 }
 
 .question {
@@ -69,6 +69,16 @@
     cursor: pointer;
 }
 
+.closex {
+    width: 16px;
+    height: 16px;
+    background-image: url(/static/img/x.png);
+    float: right;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
 .question .fr {
     display: none;
 }
@@ -77,4 +87,8 @@ input.enddate {
     background: transparent;
     padding: 2px 5px;
     width: 150px;
+}
+
+.testtitle {
+    font-size: 22px;
 }

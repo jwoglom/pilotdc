@@ -9,18 +9,8 @@ $(".done").click(function() {
     submit();
 })
 
-$(".mc-options .option > span").click(function() {
-    $(this).parent().remove();
-})
 
-$(".mc-options .option").dblclick(function() {
-    $(".option", $(this).parent()).removeClass("correct");
-    $(this).addClass("correct");
-})
 
-$(".option-add").click(function() {
-    $(this).parent().append("<div class='option' contenteditable=true ondblclick='this.remove()'><span></span>Option</div>");
-})
 
 add = function() {
     $(".questions").append($("<div class='question'></div>").html($("script#question").html()));
@@ -39,6 +29,20 @@ add = function() {
             $('.mc', $(this).parent()).hide();
         }
     });
+
+    $(".mc-options .option > span").click(function() {
+        $(this).parent().remove();
+    })
+
+    $(".mc-options .option").dblclick(function() {
+        $(".option", $(this).parent()).removeClass("correct");
+        $(this).addClass("correct");
+    })
+
+
+    $(".option-add").click(function() {
+        $(this).parent().append("<div class='option' contenteditable=true ondblclick='this.remove()'><span></span>Option</div>");
+    })
 
 
     $("input.enddate").datetimepicker();
@@ -73,9 +77,10 @@ parse = function() {
 }
 
 send = function(data) {
-    var enddate = $("input.enddate").attr("value");
+    var enddate = $("input.enddate").val();
     if(enddate == "") enddate = "01/01/3000 00:00";
-    $.post('/quest/add/submit/', {'data': JSON.stringify(data), 'enddate': enddate}, function() {
+    var testtitle = $(".testtitle").html();
+    $.post('/quest/add/submit/', {'data': JSON.stringify(data), 'testtitle': testtitle, 'enddate': enddate}, function() {
         location.href = '/dashboard';
     });
 }

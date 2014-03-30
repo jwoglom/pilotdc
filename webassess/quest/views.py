@@ -7,9 +7,18 @@ import json
 from quest.models import Test
 from users.models import Teacher
 from django.utils import timezone
+from django.utils.dateparse import parse_datetime
 from IPython import embed
 import json
-import time
+import pytz
+
+@login_required
+@user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) > 0, login_url='/login/?req=teacher')
+def teacher_view(request):
+    test_list = Test.objects.order_by('-postdate')
+    return render(request, 'quest/teacher.html', {'tests': test_list})
+
+
 @login_required
 def take_view(request, test_id):
     try:
@@ -83,10 +92,14 @@ def grade(tsave):
         if ansSave.correct: 
             tsave.score+=1
             tsave.save()
-    
+
+@login_required
+@user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) > 0, login_url='/login/?req=teacher')
 def add_view(request):
     return render(request, 'quest/add.html', {})
 
+@login_required
+@user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) > 0, login_url='/login/?req=teacher')
 def add_submit(request):
     if request.POST:
         data = request.POST.get('data')
@@ -95,7 +108,7 @@ def add_submit(request):
         print enddate
         tobj = Test(
             creator=Teacher.objects.get(user=request.user),
-            enddate=time.strptime(str(enddate), '%m/%d/%Y %H:%M')
+            enddate=pytz.timezone("America/New_York").localize(parse_datetime(enddate), is_dst=None)
         )
         tobj.save()
         for opt in jdat.options:
