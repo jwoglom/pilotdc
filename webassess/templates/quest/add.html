@@ -13,9 +13,9 @@
 {% endblock %}
 {% block page %}
 <script type="text/template" id="question">
-    <input type="radio" class="type" name="type" value="mc" checked /> Multiple Choice
-    &nbsp; &nbsp; &nbsp;
-    <input type="radio" class="type" name="type" value="fr" /> Free Response<br />
+    <form><input type="radio" class="type" name="type" value="mc" checked /> Multiple Choice</form>
+    <!--&nbsp; &nbsp; &nbsp;
+    <input type="radio" class="type" name="type" value="fr" /> Free Response<br />-->
     <div class='title' contenteditable=true onclick="$(this).selectText();">Title</div><br />
     <div class='main-opts'>
     Tags: <span class='tags' contenteditable=true onclick="$(this).selectText();">separate with spaces</span>
