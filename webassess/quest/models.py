@@ -1,6 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
-from users.models import Teacher
+#from users.models import Teacher
 import datetime
 
 class Tag(models.Model):
@@ -30,7 +30,7 @@ class Test(models.Model):
                 default=datetime.datetime.now,
                 blank=True,
             )
-    creator = models.ForeignKey(Teacher, null=True)
+    creator = models.ForeignKey('users.Teacher', null=True)
     enddate = models.DateTimeField('date of closing',
                 default=lambda: datetime.datetime.now() + datetime.timedelta(days=9999),
                 blank=True
@@ -39,15 +39,13 @@ class Test(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
-"""
-class TestSave(models.Model):
-    test = models.ForeignKey(Test)
-    saves = models.ManyToManyField(AnswerSave)
-    score = models.IntegerField()
-
 
 class AnswerSave(models.Model):
     question = models.ForeignKey(Question)
     choice = models.ForeignKey(AnswerOption)
-    correct = models.BooleanField()
-"""
+    correct = models.BooleanField(default=False)
+
+class TestSave(models.Model):
+    test = models.ForeignKey(Test)
+    saves = models.ManyToManyField(AnswerSave)
+    score = models.IntegerField(default=0)
