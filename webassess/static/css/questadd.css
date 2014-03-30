@@ -1,0 +1,74 @@
+.questions {
+    margin-top: 75px;
+}
+
+.question {
+    width: 80%;
+    height: auto;
+    padding: 5px 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.question .title {
+    font-size: 22px;
+}
+
+.question .main-opts {
+    font-size: 14px;
+}
+
+.question *[contenteditable=true] {
+    border: 1px solid #999999;
+    border-radius: 5px;
+    padding: 2px;
+    min-width: 20px;
+}
+
+.buttons {
+    position: absolute;
+    right: 50px;
+    top: 5px;
+}
+
+.buttons button {
+    font-size: 15px;
+    
+}
+
+.option-add {
+    position: relative;
+    padding: 5px 10px;
+    margin: -5px 50px;
+}
+
+.mc-options {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.mc-options .option.correct {
+    background-color: yellow;
+}
+
+.mc-options .option > span {
+    width: 16px;
+    height: 16px;
+    background-image: url(/static/img/x.png);
+    display: block;
+    float: right;
+    z-index: 99;
+    cursor: pointer;
+}
+
+.question .fr {
+    display: none;
+}
+
+.question input.enddate {
+    background: transparent;
+    padding: 2px 5px;
+    width: 75px;
+}
