@@ -49,7 +49,7 @@
     <table>
     <tr>
     <th class="name">Name</th>
-    <th>Teacher</th>
+    <!--<th>Teacher</th>-->
     <th>Close Time</th>
     <th>Taken</th>
     <th>Score</th>
@@ -58,12 +58,12 @@
         <tr>
             {% ifequal open "-1" %}
                 {% ifequal score "-1" %}
-                <td><a href="/quest/take/{{ test.id }}">{{ test.name }}</a></td>
+                <td><!--a href="/quest/take/{{ test.id }}"-->{{ test.name }}<!--/a--></td>
                 {% else %}
                 <td>{{ test.name }}</td>
                 {% endifequal %}
 
-                <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
+                <!--<td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>-->
                 <td>{{ test.enddate }}</td>
                 {% ifnotequal score "-1" %}
                 <td>Yes</td>

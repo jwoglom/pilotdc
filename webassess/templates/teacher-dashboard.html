@@ -17,12 +17,14 @@
     <th class="name">Name</th>
     <!--<th>Teacher</th>-->
     <th>Close Time</th>
+    <th></th>
     </tr>
     {% for test in after %}
         <tr>
             <td><a href="/quest/take/{{ test.id }}">{{ test.name }}</a></td>
             <!--<td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>-->
             <td>{{ test.enddate }}</td>
+            <td><form action="/quest/del/" onsubmit="return confirm('Are you sure you want to delete this?')" method=post>{% csrf_token %}<input type="hidden" name="id" value="{{ test.id }}" /><input type="submit" value="Delete" /></form></td>
         </tr>
     {% endfor %}
     </table>
@@ -36,12 +38,14 @@
     <th class="name">Name</th>
     <!--<th>Teacher</th>-->
     <th>Close Time</th>
+    <th></th>
     </tr>
     {% for test in before %}
         <tr>
-            <td><a href="/quest/review/{{ test.id }}">{{ test.name }}</a></td>
+            <td><!--a href="/quest/review/{{ test.id }}"-->{{ test.name }}<!--/a--></td>
             <!--<td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>-->
             <td>{{ test.enddate }}</td>
+            <td><form action="/quest/del/" onsubmit="return confirm('Are you sure you want to delete this?')" method=post>{% csrf_token %}<input type="hidden" name="id" value="{{ test.id }}" /><input type="submit" value="Delete" /></form></td>
         </tr>
     {% endfor %}
     </table>
