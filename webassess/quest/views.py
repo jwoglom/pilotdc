@@ -64,7 +64,11 @@ def submit_view(request):
             new.save()
             saveobj.saves.add(new)
             print "Added"
-        embed()
+        for k in qmap.keys():
+            ansSave = saveobj.saves.get(id=int(k))
+            ansSave.choice = AnswerOption.objects.get(id=int(qmap[k]))
+            ansSave.save()
+        grade(saveobj)
         return redirect("/")
 
 def grade(tsave):
