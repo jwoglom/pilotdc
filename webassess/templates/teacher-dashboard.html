@@ -15,13 +15,13 @@
     <table>
     <tr>
     <th class="name">Name</th>
-    <th>Teacher</th>
+    <!--<th>Teacher</th>-->
     <th>Close Time</th>
     </tr>
     {% for test in after %}
         <tr>
             <td><a href="/quest/take/{{ test.id }}">{{ test.name }}</a></td>
-            <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
+            <!--<td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>-->
             <td>{{ test.enddate }}</td>
         </tr>
     {% endfor %}
@@ -34,13 +34,13 @@
     <table>
     <tr>
     <th class="name">Name</th>
-    <th>Teacher</th>
+    <!--<th>Teacher</th>-->
     <th>Close Time</th>
     </tr>
     {% for test in before %}
         <tr>
             <td><a href="/quest/review/{{ test.id }}">{{ test.name }}</a></td>
-            <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
+            <!--<td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>-->
             <td>{{ test.enddate }}</td>
         </tr>
     {% endfor %}

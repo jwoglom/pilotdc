@@ -14,7 +14,7 @@
     <table>
     <tr>
     <th class="name">Name</th>
-    <th>Teacher</th>
+    <!--<th>Teacher</th>-->
     <th>Close Time</th>
     <th>Taken</th>
     <th>Score</th>
@@ -27,7 +27,7 @@
                 {% else %}
                 <td>{{ test.name }}</td>
                 {% endifequal %}
-                <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
+                <!--<td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>-->
                 <td>{{ test.enddate }}</td>
                 {% ifnotequal score "-1" %}
                 <td>Yes</td>
