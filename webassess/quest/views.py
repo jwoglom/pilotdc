@@ -6,7 +6,7 @@ import json
 from quest.models import Test
 from users.models import Teacher
 from django.utils import timezone
-
+from IPython import embed
 @login_required
 def take_view(request, test_id):
     try:
@@ -64,8 +64,16 @@ def submit_view(request):
             new.save()
             saveobj.saves.add(new)
             print "Added"
+        embed()
         return redirect("/")
 
-#def grade(tsave):
-#    for question in saves.all():
-#        
+def grade(tsave):
+    for ansSave in tsave.saves.all():
+        if ansSave.choice == ansSave.question.answer:
+            ansSave.correct=True
+            ansSave.save()
+    for ansSave in tsave.saves.all():
+        if ansSave.correct: 
+            tsave.score+=1
+            tsave.save()
+    
