@@ -70,3 +70,8 @@
 .qcontents .review table td {
     padding: 10px;
 }
+
+.qc-choices .cq-opt {
+    clear: both;
+    padding-bottom: 1px;
+}

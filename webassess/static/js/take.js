@@ -106,11 +106,11 @@ $.extend(true, quest, {
             $(".review table").append(
                 "<tr data-id='"+i+"'>" +
                 "<td>#"+i+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td>" +
-                "<td>You said <span title=\""+a.id+"\">"+a.html.replace(/<(.|\n)*?>/, '')+"</span></td>" +
+                "<td>You said: &nbsp; <span title=\""+a.id+"\">"+a.html.replace(/<(.|\n)*?>/, '')+"</span></td>" +
                 "</tr>");
         }
-        $(".review table > tr").click(function() {
-            this.jump($(this).attr('data-id'));
+        $(".review table tr").click(function() {
+            quest.jump($(this).attr('data-id'));quest.unreview();
         })
     },
     unreview: function() {
