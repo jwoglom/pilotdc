@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from quest.models import AnswerOption, Question, Test, AnswersSave, AnswerSave
+from quest.models import AnswerOption, Question, Test
+#, AnswersSave, AnswerSave
 import json
 from quest.models import Test
 from django.utils import timezone
