@@ -75,8 +75,12 @@ def submit_view(request):
             new.save()
             saveobj.saves.add(new)
             print "Added"
+            saveobj.save()
         for k in qmap.keys():
-            ansSave = saveobj.saves.get(id=int(k))
+            print k,qmap[k]
+            ansSave = -1
+            for ans in saveobj.saves.all():
+                if ans.question.id==int(k): ansSave=ans
             ansSave.choice = AnswerOption.objects.get(id=int(qmap[k]))
             ansSave.save()
         grade(saveobj)
