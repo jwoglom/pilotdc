@@ -1,0 +1,49 @@
+{% extends "skeleton_body.html" %}
+{% load staticfiles %}
+{% block mod %}dashboard{% endblock %}
+{% block modtitle %}Dashboard{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}" />
+{% endblock %}
+{% block page %}
+<div class="pane pane1">
+    <div class="title">
+        <span>Open Tests</span>
+    </div>
+    <table>
+    <tr>
+    <th class="name">Name</th>
+    <th>Teacher</th>
+    <th>Close Time</th>
+    </tr>
+    {% for test in after %}
+        <tr>
+            <td><a href="/quest/take/{{ test.id }}">Example Test</a></td>
+            <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
+            <td>{{ test.enddate }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+<div class="pane pane2">
+    <div class="title">
+        <span>Closed Tests</span>
+    </div>
+    <table>
+    <tr>
+    <th class="name">Name</th>
+    <th>Teacher</th>
+    <th>Close Time</th>
+    </tr>
+    {% for test in before %}
+        <tr>
+            <td><a href="/quest/review/{{ test.id }}">Example Test</a></td>
+            <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
+            <td>{{ test.enddate }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+</div>
+{% endblock %}
