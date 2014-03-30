@@ -10,7 +10,7 @@ class Tag(models.Model):
         return unicode(self.name)
 
 class AnswerOption(models.Model):
-    text = models.CharField(default="", max_length=10000)
+    text = HTMLField()
 
     def __unicode__(self):
         return unicode(self.text)

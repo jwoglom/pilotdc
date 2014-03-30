@@ -92,18 +92,22 @@ quest = {
                 {"id": 3, "html": "3"},
                 {"id": 4, "html": "4"}
             ]
-        },
-        {
-            "id": 2,
-            "type": "mc",
-            "html": "Second is the answer to this question?",
-            "choices": [
-                {"id": 1, "html": "1"},
-                {"id": 2, "html": "correct"},
-                {"id": 3, "html": "3"},
-                {"id": 4, "html": "4"}
-            ]
         }*/
+        {% for question in questions %}
+            {
+                "id": {{ question.id }},
+                "type": "{{ question.type }}",
+                "html": "{{ question.header }}",
+                "choices" [
+                {% for choice in choices %}
+                    {
+                        "id": {{ choice.id }},
+                        "html": "{{ choice.text }}"
+                    }
+                {% endfor %}
+                ]
+            }{% if not forloop.last %},{% endif %}
+        {% endfor %}
 
     ],
     map: {
