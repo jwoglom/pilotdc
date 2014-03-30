@@ -9,6 +9,7 @@ from users.models import Teacher
 from django.utils import timezone
 from IPython import embed
 import json
+import time
 @login_required
 def take_view(request, test_id):
     try:
@@ -85,6 +86,18 @@ def add_view(request):
 def add_submit(request):
     if request.POST:
         data = request.POST.get('data')
-        dobj = json.loads(data)
-        print dobj,"loaded"
+        enddate = request.POST.get('enddate')
+        jdat = json.loads(data)
+        print jdat,"loaded"
+        tobj = Test(
+            creator=Teacher.objects.get(user=request.user),
+            enddate=time.strptime(str(enddate), '%m/%d/%Y %H:%M')
+        )
+        tobj.save()
+        for opt in jdat.options:
+            aopt = AnswerOption(html=opt.html)
+            tobj.questions.add(aopt)
+        tobj.save()
+        
+        
     return HttpResponse("")
