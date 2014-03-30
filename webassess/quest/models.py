@@ -18,7 +18,7 @@ class Question(models.Model):
         return self.header[:10]
 
 class Test(models.Model):
-    num = models.IntegerField(default=0)
+#    num = models.IntegerField(default=0)
     postdate = models.DateTimeField('date published',
             default=datetime.datetime.now,
             blank=True,
@@ -30,6 +30,6 @@ class Test(models.Model):
             )
     questions = models.ManyToManyField(Question)
     def __str__(self):
-        return "Test #" + self.num
+        return "Test #" + str(self.id)
 
 # Create your models here.
