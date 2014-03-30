@@ -77,7 +77,7 @@ parse = function() {
 }
 
 send = function(data) {
-    var enddate = $("input.enddate").attr("value");
+    var enddate = $("input.enddate").val();
     if(enddate == "") enddate = "01/01/3000 00:00";
     var testtitle = $(".testtitle").html();
     $.post('/quest/add/submit/', {'data': JSON.stringify(data), 'testtitle': testtitle, 'enddate': enddate}, function() {
