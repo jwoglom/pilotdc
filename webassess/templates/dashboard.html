@@ -17,17 +17,22 @@
     <th>Teacher</th>
     <th>Close Time</th>
     <th>Taken</th>
+    <th>Score</th>
     </tr>
-    {% for test in after %}
+    {% for test,open,score in tests %}
         <tr>
-            <td><a href="/quest/take/{{ test.id }}">Example Test</a></td>
-            <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
-            <td>{{ test.enddate }}</td>
-            {% if test.id in ids %}
-            <td>Yes</td>
-            {% else %}
-            <td>No</td>
-            {% endif %}
+            {% ifequal open "-1" %}
+                <td><a href="/quest/take/{{ test.id }}">Example Test</a></td>
+                <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
+                <td>{{ test.enddate }}</td>
+                {% ifnotequal score "-1" %}
+                <td>Yes</td>
+                <td>{{ score }}</id>
+                {% else %}
+                <td>No</td>
+                <td></td>
+                {% endifnotequal %}
+            {% endifequal %}
 
         </tr>
     {% endfor %}
@@ -43,12 +48,28 @@
     <th>Teacher</th>
     <th>Close Time</th>
     <th>Taken</th>
+    <th>Score</th>
     </tr>
-    {% for test in before %}
+    {% for test,open,score in tests %}
         <tr>
-            <td><a href="/quest/review/{{ test.id }}">Example Test</a></td>
-            <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
-            <td>{{ test.enddate }}</td>
+            {% ifnotequal open "-1" %}
+                {% ifequal score "-1" %}
+                <td><a href="/quest/take/{{ test.id }}">Example Test</a></td>
+                {% else %}
+                <td>Example Test</td>
+                {% endifequal %}
+
+                <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
+                <td>{{ test.enddate }}</td>
+                {% ifnotequal score "-1" %}
+                <td>Yes</td>
+                <td>{{ score }}</id>
+                {% else %}
+                <td>No</td>
+                <td></td>
+                {% endifnotequal %}
+            {% endifnotequal %}
+
         </tr>
     {% endfor %}
     </table>
