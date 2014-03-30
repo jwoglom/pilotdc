@@ -111,8 +111,8 @@ def add_submit(request):
             enddate=datetime.date.today() + datetime.timedelta(days=enddate)
         )
         tobj.save()
-        for opt in jdat.options:
-            aopt = AnswerOption(html=opt.html)
+        for opt in jdat[u'options']:
+            aopt = AnswerOption(text=opt[u'html'])
             tobj.questions.add(aopt)
         tobj.save()
         
