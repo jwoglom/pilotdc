@@ -1,0 +1,13 @@
+{% extends "skeleton_body.html" %}
+{% load staticfiles %}
+{% block nav %}
+    <li name="dashboard">
+        <span>Dashboard</span>
+    </li>
+    <li name="addtest" onclick="location.href = '/quest/add">
+        <span>Add Test</span>
+    </li>
+    <li name="viewtests" onclick="location.href = '/quest/teacher'">
+        <span>My Tests</span>
+    </li>
+{% endblock %}
