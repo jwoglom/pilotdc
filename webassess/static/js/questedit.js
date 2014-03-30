@@ -10,7 +10,25 @@ $(".done").click(function() {
 })
 
 
-
+loadin = function(input) {
+    q = input.questions;
+    $('.enddate').html(input.enddate);
+    for(var i in q) {
+        $e=$('.questions>div:last-child');
+        console.log(q[i]);
+        add();
+        $('input.type', $e).val(q[i].type);
+        $('.title', $e).html(q[i].html);
+        if(q[i].type == 'mc') {
+            $('.mc').show();
+            $('.mc-options').html('');
+            for(var j in k=q[i].choices) {
+                $('.mc-options').append("<div class=option contenteditable=true onclick='if(this.innerHTML==\"option\") $(this).selectText()'>"+k[j].html+"</div>");
+            }
+        }   
+    }
+    fix();
+}
 
 add = function() {
     $(".questions").append($("<div class='question'></div>").html($("script#question").html()));
@@ -18,7 +36,9 @@ add = function() {
         console.log("x");
         $(this).parent().remove();
     })
-
+    fix();
+}
+fix = function() {
     $("input.type").on("change", function() {
         nm = $(this).attr("value");
         if(nm == 'mc') {
@@ -89,7 +109,6 @@ submit = function() {
     send(data);
 }
 
-$(".newq").click();
 
 });
 
