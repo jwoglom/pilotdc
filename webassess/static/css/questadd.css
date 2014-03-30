@@ -69,6 +69,16 @@
     cursor: pointer;
 }
 
+.closex {
+    width: 16px;
+    height: 16px;
+    background-image: url(/static/img/x.png);
+    float: right;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
 .question .fr {
     display: none;
 }
