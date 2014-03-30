@@ -65,6 +65,12 @@
     background-image: url({% static 'img/x.png' %});
     display: block;
     float: right;
+    z-index: 99;
+    cursor: pointer;
+}
+
+.question .fr {
+    display: none;
 }
 
     </style>
@@ -76,6 +82,21 @@ $(function() {
 
 $(".newq").click(function() {
     $(".questions").append($("<div class='question'></div>").html($("script#question").html()));
+    $(".mc-options .option > span").click(function() {
+        console.log("x");
+        $(this).parent().remove();
+    })
+
+    $("input.type").on("change", function() {
+        nm = $(this).attr("value");
+        if(nm == 'mc') {
+            $('.mc', $(this).parent()).show();
+            $('.fr', $(this).parent()).hide();
+        } else if(nm == 'fr') {
+            $('.fr', $(this).parent()).show();
+            $('.mc', $(this).parent()).hide();
+        }
+    })
 });
 
 $(".done").click(function() {
@@ -83,7 +104,7 @@ $(".done").click(function() {
 })
 
 $(".mc-options .option > span").click(function() {
-    $(this).remove();
+    $(this).parent().remove();
 })
 
 $(".mc-options .option").dblclick(function() {
@@ -121,6 +142,7 @@ parse = function() {
 
 
 $(".newq").click();
+
 });
 
 
@@ -128,19 +150,27 @@ $(".newq").click();
 {% endblock %}
 {% block page %}
 <script type="text/template" id="question">
-<input type="radio" name="type" value="mc" checked /> Multiple Choice
+    <input type="radio" class="type" name="type" value="mc" checked /> Multiple Choice
     &nbsp; &nbsp; &nbsp;
     <input type="radio" class="type" name="type" value="fr" /> Free Response<br />
     <div class='title' contenteditable=true onclick="$(this).selectText();">Title</div><br />
     <div class='tags-cont'>
-    Tags: <span class='tags' contenteditable=true onclick="$(this).selectText();">tags here with spaces</span>
+    Tags: <span class='tags' contenteditable=true onclick="$(this).selectText();">separate with spaces</span>
     </div>
-    <br /><span style="font-size: 20px">Options:</span> <button class='option-add'>Add</button> Double-click an option to set it as correct. Click x to delete.
-    <div class='mc-options'>
-        <div class='option' contenteditable=true><span></span>Option A</div>
-        <div class='option' contenteditable=true><span></span>Option B</div>
-        <div class='option' contenteditable=true><span></span>Option C</div>
-        <div class='option' contenteditable=true><span></span>Option D</div>
+    <div class='mc'>
+        <br /><span style="font-size: 20px">Options:</span> <button class='option-add'>Add</button> Double-click an option to set it as correct. Click x to delete.
+        <div class='mc-options'>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span')==-1)this.innerHTML+='<span></span>'"><span></span>Option</div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span')==-1)this.innerHTML+='<span></span>'"><span></span>Option</div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span')==-1)this.innerHTML+='<span></span>'"><span></span>Option</div>
+            <div class='option' contenteditable=true onclick="if(this.innerHTML=='<span></span>Option') $(this).selectText();" onkeydown="if(this.innerHTML.indexOf('<span></span')==-1)this.innerHTML+='<span></span>'"><span></span>Option</div>
+        </div>
+    </div>
+    <div class='fr'>
+        <br /><span style="font-size: 20px">Free Response Answer:</span>
+        <div class='option' contenteditable=true onclick="if(this.value=='Input the answer..') $(this).selectText();">Input the answer..</div>
+    </div>
+    <br />
     </div>
 </script>
 <div class='buttons'>
