@@ -63,3 +63,7 @@ def submit_view(request):
             saveobj.saves.add(new)
             print "Added"
         return redirect("/")
+
+#def grade(tsave):
+#    for question in saves.all():
+#        
