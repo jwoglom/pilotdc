@@ -131,7 +131,12 @@ def add_submit(request):
                 aopt.save()
                 ques.choices.add(aopt)
             if u'correct' in q:
-                ques.answer = AnswerOption(text=q[u'correct'][u'html'])
+                print "Correct answer",q[u'correct'][u'html']
+                right = AnswerOption(text=q[u'correct'][u'html'])
+                right.save()
+                ques.answer = right
+            else:
+                print "[WARNING] No Correct Answer"
             ques.save()
             tobj.questions.add(ques)
         tobj.save()
