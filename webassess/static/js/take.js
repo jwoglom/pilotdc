@@ -15,6 +15,11 @@ $.extend(true, quest, {
     getqid: function(qid) {
         return this.questions.filter(function(t){return t.id == qid;})[0];
     },
+    getqlc: function(qid) {
+        for(var i=0; i<this.questions.length; i++) {
+            if(qid == this.questions[i].id) return i;
+        }
+    },
     getaid: function(q, aid) {
         return q.choices.filter(function(t){return t.id == aid;})[0];
     },
@@ -105,18 +110,19 @@ $.extend(true, quest, {
                 "<td>You said <span title=\""+j[i]+"\">"+a.html.replace(/<(.|\n)*?>/, '')+"</span></td>" +
                 "</tr>");*/
             var q = this.getqid(i);
+            var l = this.getqlc(i);
             if(q.type == 'mc') {
                 var a = q.choices[this.map[i]-1];
                 $(".review table").append(
                     "<tr data-id='"+i+"'>" +
-                    "<td>#"+i+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td>" +
+                    "<td>#"+(l+1)+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td>" +
                     "<td>You said: &nbsp; <span title=\""+a.id+"\">"+a.html.replace(/<(.|\n)*?>/, '')+"</span></td>" +
                     "</tr>");
             } else if(q.type == 'fr') {
                 var a = this.map[i];
                 $(".review table").append(
                     "<tr data-id='"+i+"'>" +
-                    "<td>#"+i+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td>" +
+                    "<td>#"+(l+1)+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td>" +
                     "<td>You said: &nbsp; <span>"+a.replace(/<(.|\n)*?>/, '')+"</span></td>" +
                     "</tr>");
             }
