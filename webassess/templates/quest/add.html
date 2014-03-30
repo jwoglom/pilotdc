@@ -126,14 +126,20 @@ parse = function() {
             title: $(".title", $(this)).html(),
             tags: $(".tags", $(this)).html().split(' ')
         };
-        opts = $(".mc-options > .option", $(this));
-        obj['options'] = [];
-        opts.each(function() {
-            obj['options'].push(o = {
-                html: $(this).html()
+        if(obj.type == 'mc') {
+            opts = $(".mc-options > .option", $(this));
+            obj['options'] = [];
+            opts.each(function() {
+                obj['options'].push(o = {
+                    html: $(this).html()
+                });
+                if($(this).hasClass('correct')) obj['correct'] = o;
             });
-            if($(this).hasClass('correct')) obj['correct'] = o;
-        });
+        } else if(obj.type == 'fr') {
+            opts = $(".mc-options > .option", $(this));
+            obj['correct'] = opts.eq(0).html();
+            obj['options'] = [obj['correct']];
+        }
         data.push(obj);
     });
     console.log(data);

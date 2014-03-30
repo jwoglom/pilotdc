@@ -9,9 +9,7 @@
 {% block js %}
     {{ block.super }}
     <script type="text/javascript">
-htmlfix = function(h) {
-    return $("<div/>").html(h).text();
-}
+htmlfix = function(h) { return $("<div/>").html(h).text(); }
 quest = {
     TESTID: {{ testid }},
     numqs: {{ questions.count }},   
@@ -30,7 +28,7 @@ quest = {
         {% for question in questions %}
             {
                 "id": {{ question.id }},
-                "type": "{{ question.type }}",
+                "type": "{{ question.qtype }}",
                 "html": htmlfix("{{ question.header }}"),
                 "choices": [
                 {% for choice in question.choices.all %}
@@ -42,7 +40,6 @@ quest = {
                 ]
             }{% if not forloop.last %},{% endif %}
         {% endfor %}
-
     ]
 };
 </script>
