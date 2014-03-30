@@ -9,7 +9,9 @@
 {% block js %}
     {{ block.super }}
     <script type="text/javascript">
-var questions = [
+htmlfix = function(h) { return $("<div/>").html(h).text(); }
+var input = {
+    questions: [
     /*{
         "id": 1,
         "type": "mc",
@@ -36,13 +38,16 @@ var questions = [
             ]
         }{% if not forloop.last %},{% endif %}
     {% endfor %}
-];
+    ],
+    'testtitle': '{{ testtitle }}',
+    'enddate': '{{ daysfrom }}'
+};
     </script>
     <script type="text/javascript" src="{% static 'js/jquery-ui-timepicker.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/questedit.js' %}"></script>
     <script type="text/javascript">
 $(function() {
-    loadin(questions);
+    loadin(input);
 });
     </script>
 {% endblock %}

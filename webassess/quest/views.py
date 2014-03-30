@@ -37,7 +37,6 @@ def take_view(request, test_id):
             'quest/take.html', 
             {'questions': test.questions.all(), 'testid': test_id }
             )
-    return render(request, 'quest/take.html', {})
 
 @login_required
 def submit_view(request):
@@ -137,6 +136,7 @@ def add_submit(request):
     return HttpResponse("")
 
 @login_required
+@user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) > 0, login_url='/login/?req=teacher')
 def edit_view(request, test_id):
     try:
         test_id = int(test_id)
@@ -147,8 +147,11 @@ def edit_view(request, test_id):
         test = Test.objects.get(id=test_id)
     except: 
         return render(request, 'quest/expired.html')
-    if test==-1 or test.enddate < timezone.now():
+    if test==-1:
         return render(request, 'quest/expired.html')
     return render(request, 'quest/edit.html', {
-        'questions': test.questions.all()
+        'questions': test.questions.all(),
+        'testid': test_id,
+        'testtitle': test.name,
+
     })
