@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^quest/submit/$', 'quest.views.submit_view', name='Submit test'),
     url(r'^teacher_dashboard/$', 'dashboard.views.teacher_view', name='teacher_dashboard'),
     url(r'^quest/add/$', 'quest.views.add_view', name='add_view'),
-    url(r'^quest/add/submit/$', 'quest.views.add_submit', name='add_submit'),
+    #url(r'^quest/add/submit/$', 'quest.views.add_submit', name='add_submit'),
     url(r'^admin/', include(admin.site.urls)),
     (r'^tinymce/', include('tinymce.urls')),
 )

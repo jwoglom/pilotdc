@@ -66,6 +66,9 @@ def submit_view(request):
             print "Added"
         return redirect("/")
 
+def add_view(request):
+    return render(request, 'quest/add.html', {})
+
 #def grade(tsave):
 #    for question in saves.all():
 #        
