@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     }),
     url(r'^logout/$', 'users.views.process_logout', name='process_logout'),
 
-    url(r'^quest/take/1$', 'quest.views.take_view', name='quest_take'),
+    url(r'^quest/take/(?P<test_id>\d+)$', 'quest.views.take_view', name='quest_take'),
 
     url(r'^admin/', include(admin.site.urls)),
     (r'^tinymce/', include('tinymce.urls')),
