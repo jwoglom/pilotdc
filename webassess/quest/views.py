@@ -167,3 +167,12 @@ def edit_view(request, test_id):
         'testtitle': test.name,
 
     })
+
+@login_required
+@user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) > 0, login_url='/login/?req=teacher')
+def del_view(request):
+    if request.POST:
+        id = request.POST.get('id')
+        Test.objects.get(id=id).delete()
+    return redirect("/")
+

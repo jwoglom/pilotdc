@@ -6,6 +6,9 @@
 
 {% block js %}
     {{ block.super }}
+    <script type="text/javascript">
+    $(function() { $("#id_username").focus(); })
+    </script>
 {% endblock %}
 </head>
 <body>
