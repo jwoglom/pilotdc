@@ -40,5 +40,15 @@ class Test(models.Model):
 
     def __unicode__(self):
         return unicode(self.num)
+"""
+class TestSave(models.Model):
+    test = models.ForeignKey(Test)
+    saves = models.ManyToManyField(AnswerSave)
+    score = models.IntegerField()
 
-# Create your models here.
+
+class AnswerSave(models.Model):
+    question = models.ForeignKey(Question)
+    choice = models.ForeignKey(AnswerOption)
+    correct = models.BooleanField()
+"""
