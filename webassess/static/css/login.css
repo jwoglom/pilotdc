@@ -33,7 +33,7 @@
     min-height: 200px;
     width: 100%;
 
-    background-image: url(http://placekitten.com/128/128);
+    background-image: url(/static/img/chkt.png);
     background-repeat: no-repeat;
     background-position: top center;
 }
