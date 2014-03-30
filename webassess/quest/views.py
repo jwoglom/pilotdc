@@ -1,9 +1,10 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from quest.models import TestSave, AnswerOption, Question, Test
 #, AnswersSave, AnswerSave
 import json
 from quest.models import Test
+from users.models import Teacher
 from django.utils import timezone
 
 @login_required
@@ -47,3 +48,11 @@ def submit_view(request):
         #    test=testobj,
         #    saves=
         #)
+
+@user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) > 0, login_url='/login/?req=teacher')
+def add_view(request):
+    return render(request, 'quest/add.html', {})
+
+@user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) > 0, login_url='/login/?req=teacher')
+def add_submit(request):
+    pass
