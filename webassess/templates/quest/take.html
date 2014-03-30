@@ -9,9 +9,12 @@
 {% block js %}
     {{ block.super }}
     <script type="text/javascript">
+htmlfix = function(h) {
+    return $("<div/>").html(h).text();
+}
 quest = {
     TESTID: 1,
-    numqs: 2,
+    numqs: 2,   
     questions: [
         /*{
             "id": 1,
@@ -28,12 +31,12 @@ quest = {
             {
                 "id": {{ question.id }},
                 "type": "{{ question.type }}",
-                "html": "{{ question.header }}",
-                "choices" [
-                {% for choice in choices %}
+                "html": htmlfix("{{ question.header }}"),
+                "choices": [
+                {% for choice in choices.objects.all %}
                     {
                         "id": {{ choice.id }},
-                        "html": "{{ choice.text }}"
+                        "html": htmlfix("{{ choice.text }}")
                     }
                 {% endfor %}
                 ]
