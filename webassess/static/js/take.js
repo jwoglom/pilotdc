@@ -6,6 +6,7 @@ $.extend(true, quest, {
     curqnum: 0,
     status: "",
     goback: function() {
+        if(this.status == "review") return this.unreview();
         if(this.curqnum < 1) return;
         this.nexttext();
         this.curqnum--;
@@ -72,16 +73,22 @@ $.extend(true, quest, {
     },
     review: function() {
         this.status = "review";
+        this.curqnum--;
         $("button.gon").html("Submit Test");
-        $("button.gob").html("Back to Test");
+        $("button.gop").html("Back to Test");
         $(".qcontents .review").show();
         $(".qcontents .qhtml, .qcontents .qoptions").hide();
+        $(".review table").html("");
         for(var i in j=this.map) {
-            var q = this.getqid(i);
+            var q = window.q= this.getqid(i);
             console.log(q);
-            var a = this.getaid(q, parseInt(j[i]));
+            var a = window.a= this.getaid(q, i);
             console.log(a);
-            $(".review table").append("<tr data-id='"+i+"'><td>#"+i+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td><td>You said <span title=\""+j[i]+"\">"+a.html.replace(/<(.|\n)*?>/, '')+"</span></td></tr>");
+            $(".review table").append(
+                "<tr data-id='"+i+"'>" +
+                "<td>#"+i+"</td><td>"+q.html.replace(/<(.|\n)*?>/, '')+"</td>" +
+                "<td>You said <span title=\""+j[i]+"\">"+a.html.replace(/<(.|\n)*?>/, '')+"</span></td>" +
+                "</tr>");
         }
         $(".review table > tr").click(function() {
             this.jump($(this).attr('data-id'));
@@ -90,9 +97,10 @@ $.extend(true, quest, {
     unreview: function() {
         this.status = "";
         $("button.gon").html("Next");
-        $("button.gob").html("Previous");
-        $(".qform .review").hide();
-        $(".qform .qhtml, .qform .qoptions").show();
+        $("button.gop").html("Previous");
+        $(".qcontents .review").hide();
+        $(".qcontents .qhtml, .qcontents .qoptions").show();
+        this.jump(this.curqid);
         
     },
     init: function() {

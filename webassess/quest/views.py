@@ -22,7 +22,7 @@ def take_view(request, test_id):
     #print test.questions.all()
     return render(request, 
             'quest/take.html', 
-            {'questions': test.questions.all() }
+            {'questions': test.questions.all(), 'testid': test_id }
             )
     return render(request, 'quest/take.html', {})
 
