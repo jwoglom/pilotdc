@@ -22,11 +22,11 @@
     <form action="/login/" method="post">
     {% csrf_token %}
             
-                <label>{{ form.username.label_tag }}</label><br />
-                {{ form.username }}
+                {{ form.username.label_tag }}<br />
+                {{ form.username }}<br />
 
-                <label>{{ form.password.label_tag }}</label><br />
-                {{ form.password }}
+                {{ form.password.label_tag }}<br />
+                {{ form.password }}<br />
             
             <input type="submit" value="Login" />
             <input type="hidden" name="next" value="{{ next }}" />

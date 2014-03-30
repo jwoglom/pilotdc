@@ -63,3 +63,7 @@
     width: 95%;
 
 }
+
+.login label {
+    text-align: left;
+}
