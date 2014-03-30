@@ -80,17 +80,15 @@ def submit_view(request):
             print k,qmap[k]
             ansSave = -1
             for ans in saveobj.saves.all():
-                if ans.question.id==int(k): 
-                    ansSave=ans
-                    print "Found Question",ansSave
-            ansSave.choice = Question.objects.get(id=int(k)).choices.all()[int(qmap[k])-1]
+                if ans.question.id==int(k): ansSave=ans
+            ansSave.choice = AnswerOption.objects.get(id=int(qmap[k]))
             ansSave.save()
         grade(saveobj)
         return redirect("/")
 
 def grade(tsave):
     for ansSave in tsave.saves.all():
-        if ansSave.choice.text == ansSave.question.answer.text:
+        if ansSave.choice == ansSave.question.answer:
             ansSave.correct=True
             ansSave.save()
     for ansSave in tsave.saves.all():
@@ -166,3 +164,12 @@ def edit_view(request, test_id):
         'testtitle': test.name,
 
     })
+
+@login_required
+@user_passes_test(lambda u: len(Teacher.objects.filter(user=u)) > 0, login_url='/login/?req=teacher')
+def del_view(request):
+    if request.POST:
+        id = request.POST.get('id')
+        Test.objects.get(id=id).delete()
+    return redirect("/")
+
