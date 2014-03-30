@@ -21,8 +21,12 @@
     </tr>
     {% for test,open,score in tests %}
         <tr>
-            {% ifequal open "-1" %}
-                <td><a href="/quest/take/{{ test.id }}">Example Test</a></td>
+            {% ifnotequal open "-1" %}
+                {% ifequal score "-1" %}
+                <td><a href="/quest/take/{{ test.id }}">{{ test.name }}</a></td>
+                {% else %}
+                <td>{{ test.name }}</td>
+                {% endifequal %}
                 <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
                 <td>{{ test.enddate }}</td>
                 {% ifnotequal score "-1" %}
@@ -32,7 +36,7 @@
                 <td>No</td>
                 <td></td>
                 {% endifnotequal %}
-            {% endifequal %}
+            {% endifnotequal %}
 
         </tr>
     {% endfor %}
@@ -52,11 +56,11 @@
     </tr>
     {% for test,open,score in tests %}
         <tr>
-            {% ifnotequal open "-1" %}
+            {% ifequal open "-1" %}
                 {% ifequal score "-1" %}
-                <td><a href="/quest/take/{{ test.id }}">Example Test</a></td>
+                <td><a href="/quest/take/{{ test.id }}">{{ test.name }}</a></td>
                 {% else %}
-                <td>Example Test</td>
+                <td>{{ test.name }}</td>
                 {% endifequal %}
 
                 <td>{{ test.creator.user.first_name }} {{ test.creator.user.last_name }}</td>
@@ -68,7 +72,7 @@
                 <td>No</td>
                 <td></td>
                 {% endifnotequal %}
-            {% endifnotequal %}
+            {% endifequal %}
 
         </tr>
     {% endfor %}

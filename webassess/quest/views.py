@@ -92,7 +92,7 @@ def add_submit(request):
         data = request.POST.get('data')
         enddate = request.POST.get('enddate')
         jdat = json.loads(data)
-        print jdat,"loaded"
+        print enddate
         tobj = Test(
             creator=Teacher.objects.get(user=request.user),
             enddate=time.strptime(str(enddate), '%m/%d/%Y %H:%M')
