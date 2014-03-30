@@ -42,10 +42,13 @@ class Test(models.Model):
 
 class AnswerSave(models.Model):
     question = models.ForeignKey(Question)
-    choice = models.ForeignKey(AnswerOption)
+    choice = models.ForeignKey('AnswerOption', null=True, blank=True)
     correct = models.BooleanField(default=False)
 
 class TestSave(models.Model):
+    user = models.ForeignKey('users.Student', null=True)
     test = models.ForeignKey(Test)
     saves = models.ManyToManyField(AnswerSave)
     score = models.IntegerField(default=0)
+    def __unicode__(self):
+        return unicode("")

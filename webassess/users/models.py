@@ -12,10 +12,7 @@ class Student(models.Model):
     school = models.ForeignKey(School)
     tests = models.ManyToManyField('quest.TestSave')
     def get_full_name(self):
-        if self.mi != '':
-            return self.user.last_name + ", " + self.user.first_name + " " + self.mi + "."
-        else:
-            return self.user.last_name + ", " + self.user.first_name
+        return self.user.last_name + ", " + self.user.first_name
     
     def get_short_name(self):
         return self.user.username
@@ -27,10 +24,7 @@ class Teacher(models.Model):
     user = models.OneToOneField(User)
     school = models.ForeignKey(School)
     def get_full_name(self):
-        if self.mi != '':
-            return self.user.last_name + ", " + self.user.first_name + " " + self.mi + "."
-        else:
-            return self.user.last_name + ", " + self.user.first_name
+        return self.user.last_name + ", " + self.user.first_name
     
     def get_short_name(self):
         return self.user.username
