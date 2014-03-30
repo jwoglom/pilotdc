@@ -14,7 +14,7 @@ htmlfix = function(h) {
 }
 quest = {
     TESTID: 1,
-    numqs: 2,   
+    numqs: {{ questions.count }},   
     questions: [
         /*{
             "id": 1,
@@ -33,11 +33,11 @@ quest = {
                 "type": "{{ question.type }}",
                 "html": htmlfix("{{ question.header }}"),
                 "choices": [
-                {% for choice in choices.objects.all %}
+                {% for choice in question.choices.all %}
                     {
                         "id": {{ choice.id }},
                         "html": htmlfix("{{ choice.text }}")
-                    }
+                    }{% if not forloop.last %},{% endif %}
                 {% endfor %}
                 ]
             }{% if not forloop.last %},{% endif %}
